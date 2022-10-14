@@ -81,7 +81,7 @@ body {
     }
     /*RED*/
     .b-red, .b-red:before {
-      background: rgba(234,110,72,1);
+      background: rgb(72, 72, 234);
       background: -moz-linear-gradient(45deg, rgba(234,110,72,1) 0%, rgba(188,26,99,1) 100%);
       background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(234,110,72,1)), color-stop(100%, rgba(188,26,99,1)));
       background: -webkit-linear-gradient(45deg, rgba(234,110,72,1) 0%, rgba(188,26,99,1) 100%);
