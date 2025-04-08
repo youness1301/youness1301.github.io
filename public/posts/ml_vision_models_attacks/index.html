@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>
+Vision Models Adversial Attacks | Youness Blog
+</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cet article couvre les attaques de type FGSM et One Pixel Attack">
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<link rel="canonical" href="http://localhost:1313/posts/ml_vision_models_attacks/" >
+
+
+
+
+<link href="/css/style.min.5c1fa9bba2d0e854fe30b3d6316ab0114a2a5f25c9a98275badeadb66f2ec725.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+
+    <div class="flexWrapper">
+        <header class="headerWrapper">
+    <div class="header">
+        <div>
+            <a class="terminal" href="/">
+                <span>starkjr01@ ~ $</span>
+            </a>
+        </div>
+        <input class="side-menu" type="checkbox" id="side-menu">
+        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+        <nav class="headerLinks">
+            <ul>
+                
+                <li>
+                    <a href="http://localhost:1313/posts" title="" >
+                        ~/posts</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <main class="main">
+                
+<div class="postWrapper">
+    <h1>Vision Models Adversial Attacks</h1>
+    
+    	<p>Cet article couvre les attaques de type FGSM et One Pixel Attack</p>
+    
+    
+    <section class="postMetadata">
+        <dl>
+            
+            
+            
+            
+                <dt>published</dt>
+                
+                <dd><time datetime="2025-04-07">April 7, 2025</time></dd>
+            
+            
+                <dt>reading time</dt>
+                <dd>7 minutes</dd>
+            
+        </dl>
+    </section>
+    
+    <div>
+        <h1 id="i-introduction">I. INTRODUCTION</h1>
+<p>Avant de voir comment attaquer un modèle de vision il faut revenir sur ce qu&rsquo;est un modèle de vision, à quoi ça sert et comment ça fonctionne.</p>
+<h2 id="1-quest-ce-quun-modèle-de-vision-">1. Qu&rsquo;est-ce qu&rsquo;un modèle de vision ?</h2>
+<p>Un modèle de vision est un type de modèle d&rsquo;intelligence artificielle permettant à un ordianteur de comprendre et interpréter des images ou des vidéos.</p>
+<p>Un modèle de vision permet notamment :</p>
+<ul>
+<li>la reconnaissance d&rsquo;objet</li>
+<li>la segmentation d&rsquo;image</li>
+</ul>
+<p>Les modèles de vision sont couramment utilisés dans les domaines :</p>
+<ul>
+<li>Reconnaissance Faciale</li>
+<li>Conduite autonome</li>
+<li>Analyse médicale</li>
+</ul>
+<p>Les modèles de vision font partie d&rsquo;un concept plus large : la &ldquo;Vision par ordinateur&rdquo; (Computer Vision). Les modèles de vision contribuent à simmuler l&rsquo;un des cinqs sens humains : la vue.</p>
+<p><img src="/images/Artificial-intelligence-and-its-subfields.jpg?width=200px" alt="Resize">
+<em>source : <a href="https://www.researchgate.net/figure/Artificial-intelligence-and-its-subfields_fig1_379731735">https://www.researchgate.net/figure/Artificial-intelligence-and-its-subfields_fig1_379731735</a></em></p>
+<h2 id="2-fonctionnement-dun-modèle-de-vision-">2. Fonctionnement d&rsquo;un modèle de vision :</h2>
+<h3 id="a-conception-et-développement-">a. Conception et développement :</h3>
+<p>Comme tout type de modèle d&rsquo;intelligence artificielle, la première phase de développement d&rsquo;un modèle de vision est <strong>le choix ainsi que la collecte des données</strong> qui serviront au modèle pour s&rsquo;entrainer à être capable de reconnaitre des éléments (<em>labels</em>) au sein de données visuelles comme des images ou des vidéos.</p>
+<p>La seconde étape consiste à choisir le type d&rsquo;algorithme le plus adapté pour entrainer le modèle. Voici quelque exemples d&rsquo;algorithme couramment utilisés pour le développement de modèles de vision :</p>
+<ul>
+<li>K-means clustering : segementation de couleurs</li>
+<li>U-Net : segmentation de structure</li>
+<li>Mask R-CNN : segmentation objet par objet</li>
+<li>CNNs (Réseaux de neurones de convolution) : classification d&rsquo;images</li>
+</ul>
+<p>Ces différents algorithmes/réseaux de neurone prènent en entrée de la donnée sous forme :</p>
+<ul>
+<li>modèles basés sur le framework PyTorch :</li>
+</ul>
+<pre tabindex="0"><code>(N, C, H, W)
+</code></pre><ul>
+<li>modèles basés sur le framework Tensorflow/Keras:</li>
+</ul>
+<pre tabindex="0"><code>(N, H, W, C)
+</code></pre><p>Avec :</p>
+<ul>
+<li>N = nombre d&rsquo;image (batch size)</li>
+<li>C = nmbre de canaux (3 pour des images RGB, 1 pour des images en nuance de gris)</li>
+<li>H = hauteur des images</li>
+<li>W = largeur des images</li>
+</ul>
+<p>Pour la suite du développement de cet article, prenons l&rsquo;exemple du développement d&rsquo;un modèle de reconnaissance d&rsquo;espèces de chiens :</p>
+<ul>
+<li>Premère étape:
+<ul>
+<li><strong>Choix des espèces de chien que l&rsquo;on veut que le modèle reconnaisse.</strong> Les différentes espèces constituent les différents <strong>labels</strong></li>
+<li><strong>Fabriquation d&rsquo;un dataset d&rsquo;images des chiens correspondant aux différentes espèces (labels) à reconnaitre</strong>. Dans le cas d&rsquo;un modèle de computer vision la majorité des modèles se basent sur de l&rsquo;entraînement supervisé. Ainsi le dataset doit être de la forme <code>IMAGE --&gt; label</code></li>
+</ul>
+</li>
+<li>Deuxième étape :
+<ul>
+<li><strong>Choix de l&rsquo;algorithme le plus adapté dans le cas de la reconnaissance de chien</strong>. Dans notre cas, pour de la reconnaissance d&rsquo;espèces de chien un modèle de type CNN (Réseau de neurone de convolution) permettant de faire de la calssification d&rsquo;image serait pertinant.</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-entraînement-du-modèle">b. Entraînement du modèle</h3>
+<p>Une fois avoir construit le dataset servant à l&rsquo;entraînement du modèle et choisi le type d&rsquo;algorithme/réseau de neuronne adapté à l&rsquo;objectif du modèle, la troisième étape consiste à entrainer le modèle.</p>
+<p>Durant cette phase le modèle apprend, à partir des données d&rsquo;entrainement, à reconnaitre des paternes.</p>
+<p>Dans le cas de l&rsquo;entraînement d&rsquo;un réseau de neurone de convolution, la pahse d&rsquo;entraînement sert à optimiser les différents poids (appelés poids synaptiques) pour classifier avec précision les images qu&rsquo;il reçoit en entrée du modèle</p>
+<h3 id="c-évaluation-du-modèle">c. évaluation du modèle</h3>
+<p>Une fois le modèle entraîné, on peut mesurer ses performances. Pour se faire on peut utiliser 4 différentes types de mesure :</p>
+<ul>
+<li>Accuracy : (nombre total de bonne prédictions) / (nb total de prédiction)</li>
+<li>Precision : (nombre de vrai positifs) / (nombre de vrai positifs + faux positifs)</li>
+<li>Recall : (nombre de vrai positifs) / (nombre de vrai positifs + nombre faux négatifs)</li>
+<li>F1-Score : 2 * (precision * recall) / (precision + recall)</li>
+</ul>
+<p>Dans le cas d&rsquo;un model permettant de faire de la classification d&rsquo;image sur plusieurs labels, il est possible de tracer une matrice de confusion permettant d&rsquo;observer les performances par label traité par le modèle.</p>
+<p><img src="/images/confusion_matrix.png?width=200px" alt="Resize"></p>
+<p>Chaque label dispose également d&rsquo;une <strong>fonction de perte</strong>. Une fonction de perte correspond aux écarts entre les mauvaises et les bonnes prédictions réalisées par le modèle. Ainsi, pour qu&rsquo;un modèle soit performant il faut réduire au maximum cette fonction de perte. (gardons bien ça à l&rsquo;esprit pour comprendre le méchanisme des attaques adversiales)</p>
+<p>Jusqu&rsquo;à présent nous avons vu des éléments théoriques de conception, de développement et d&rsquo;évaluation de modèle de vision.</p>
+<p>Maintenant regardons comment attaquer ce genre de modèles.</p>
+<h1 id="ii-attaques-adversiales">II. Attaques Adversiales</h1>
+<p>Une attaque adversariale est une méthode utilisée pour tromper un modèle d&rsquo;apprentissage automatique en modifiant de manière subtile mais ciblée les données d&rsquo;entrée (comme des images, des textes, etc.) de façon à induire une erreur de prédiction. Ces modifications sont généralement invisibles ou imperceptibles pour l&rsquo;humain, mais perturbent suffisamment le modèle pour qu&rsquo;il fasse des erreurs de classification ou de prédiction.</p>
+<p>Ce genre d&rsquo;attaque peuvent avoir de graves concéquences en terme de sécurité. En effet, on peut prendre le cas de l&rsquo;application de modèles de vision pour la conduite autonome de véhicules : si un attaquant parvient à effectuer une attaque adversiale visant à tromper le modèle en ajoutant une légère pertubation sur un panneau de signalisation par exemple, alors la prise de décision du véhicule autonome pour mettre en danger les passagers ainsi que les individus à proximité.</p>
+<h2 id="1-fgsm-fast-gradient-sign-method">1. FGSM (Fast Gradient Sign Method)</h2>
+<p>Le FGSM (Fast Gradient Sign Method) est une méthode d&rsquo;attaque adversariale qui génère des exemples (images dans notre cas) perturbés en utilisant les gradients du modèle pour maximiser la fonction de perte du modèle et aini induire des erreurs de prédiction.</p>
+<h3 id="a-principe-théorique">a. Principe théorique</h3>
+<p>L&rsquo;idée est de perturber l&rsquo;entrée xx en ajoutant un bruit ϵϵ (petite perturbation) dans la direction du gradient du modèle par rapport à la perte. Cela provoque une erreur dans la prédiction du modèle tout en créant une modification quasi invisible pour un être humain.</p>
+<p>Mathématiquement la méthode FGSM se traduit de cette façon :</p>
+<p><img src="/images/FGSM_equa.png?width=200px" alt="Resize"></p>
+<p>Avec :</p>
+<ul>
+<li>x_adv : l&rsquo;entrée modifiée (résultat adversial)</li>
+<li>x : l&rsquo;entré d&rsquo;origine</li>
+<li>epsilon : le facteur de perturbation</li>
+<li>J(teta,x,y) : la fonction de perte du modèle</li>
+<li>gradiant_x : le gradiant de la fonction de perte par rapport à l&rsquo;entrée d&rsquo;origine x</li>
+</ul>
+<p>L&rsquo;objectif de cette méthode est d&rsquo;ajouter une perturbation à l&rsquo;entrée d&rsquo;origine imperceptible pour un humain mais qui conduit le model à effectuer de mauvaises prédictions.</p>
+<h3 id="b-démonstration">b. Démonstration</h3>
+<p>Reprenons l&rsquo;expemple du modèle de vision capable de classifier les différentes espèces de chien:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pretrained_model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>applications<span style="color:#f92672">.</span>MobileNetV2(include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>                                                     weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;imagenet&#39;</span>)
+</span></span><span style="display:flex;"><span>pretrained_model<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ImageNet labels</span>
+</span></span><span style="display:flex;"><span>decode_predictions <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>applications<span style="color:#f92672">.</span>mobilenet_v2<span style="color:#f92672">.</span>decode_predictions
+</span></span></code></pre></div><p>Effectuons une prédiction avec cette image de boxer pour s&rsquo;assurer que le modèle est fonctionnel :</p>
+<p><img src="/images/boxer_origin.jpg?width=200px" alt="Resize"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Helper function to preprocess the image so that it can be inputted in MobileNetV2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preprocess</span>(image):
+</span></span><span style="display:flex;"><span>  image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>cast(image, tf<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>  image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>image<span style="color:#f92672">.</span>resize(image, (<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>))
+</span></span><span style="display:flex;"><span>  image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>applications<span style="color:#f92672">.</span>mobilenet_v2<span style="color:#f92672">.</span>preprocess_input(image)
+</span></span><span style="display:flex;"><span>  image <span style="color:#f92672">=</span> image[<span style="color:#66d9ef">None</span>, <span style="color:#f92672">...</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Helper function to extract labels from probability vector</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_imagenet_label</span>(probs):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> decode_predictions(probs, top<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>image_path <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>get_file(<span style="color:#e6db74">&#39;boxer1.jpg&#39;</span>, <span style="color:#e6db74">&#39;https://www.zooplus.fr/magazine/wp-content/uploads/2018/03/deutscher-boxer-tabby.jpg&#39;</span>)
+</span></span><span style="display:flex;"><span>image_raw <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>io<span style="color:#f92672">.</span>read_file(image_path)
+</span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>image<span style="color:#f92672">.</span>decode_image(image_raw)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> preprocess(image)
+</span></span><span style="display:flex;"><span>image_probs <span style="color:#f92672">=</span> pretrained_model<span style="color:#f92672">.</span>predict(image)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(image[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>)  <span style="color:#75715e"># To change [-1, 1] to [0,1]</span>
+</span></span><span style="display:flex;"><span>_, image_class, class_confidence <span style="color:#f92672">=</span> get_imagenet_label(image_probs)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">{:.2f}</span><span style="color:#e6db74">% Confidence&#39;</span><span style="color:#f92672">.</span>format(image_class, class_confidence<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>ce qui nous donne :</p>
+<p><img src="/images/boxer_predict.png?width=200px" alt="Resize"></p>
+<p>On remarque que le modèle a bien prédit la bonne espèce de chien.</p>
+<p>Maintenant déterminons les perturbations optimales pour dégrader les performances de détection du modèle tout en rendant les pertubations ivisibles à l&rsquo;oeuil humain :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>loss_object <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>losses<span style="color:#f92672">.</span>CategoricalCrossentropy()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_adversarial_pattern</span>(input_image, input_label):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>    tape<span style="color:#f92672">.</span>watch(input_image)
+</span></span><span style="display:flex;"><span>    prediction <span style="color:#f92672">=</span> pretrained_model(input_image)
+</span></span><span style="display:flex;"><span>    loss <span style="color:#f92672">=</span> loss_object(input_label, prediction)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get the gradients of the loss w.r.t to the input image.</span>
+</span></span><span style="display:flex;"><span>  gradient <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(loss, input_image)
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get the sign of the gradients to create the perturbation</span>
+</span></span><span style="display:flex;"><span>  signed_grad <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>sign(gradient)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> signed_grad
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the input label of the image.</span>
+</span></span><span style="display:flex;"><span>boxer_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">243</span>
+</span></span><span style="display:flex;"><span>label <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>one_hot(boxer_index, image_probs<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>label <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reshape(label, (<span style="color:#ae81ff">1</span>, image_probs<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>perturbations <span style="color:#f92672">=</span> create_adversarial_pattern(image, label)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(perturbations[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>);  <span style="color:#75715e"># To change [-1, 1] to [0,1]</span>
+</span></span></code></pre></div><p>Ce qui nous donne ce masque de perturbations :</p>
+<p><img src="/images/FGSM_mask.png?width=200px" alt="Resize"></p>
+<p>Maintenant que nous avons notre masque de pertubation optimal nous pouvons l&rsquo;appliquer à notre image d&rsquo;origine avec plusieurs valuers de coefficient de pertubation pour dégrader de plus en plus les perfomances du modèle :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">display_images</span>(image, description):
+</span></span><span style="display:flex;"><span>  _, label, confidence <span style="color:#f92672">=</span> get_imagenet_label(pretrained_model<span style="color:#f92672">.</span>predict(image))
+</span></span><span style="display:flex;"><span>  plt<span style="color:#f92672">.</span>figure()
+</span></span><span style="display:flex;"><span>  plt<span style="color:#f92672">.</span>imshow(image[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span><span style="color:#ae81ff">0.5</span><span style="color:#f92672">+</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>  plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">{:.2f}</span><span style="color:#e6db74">% Confidence&#39;</span><span style="color:#f92672">.</span>format(description,
+</span></span><span style="display:flex;"><span>                                                   label, confidence<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>  plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>epsilons <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.15</span>]
+</span></span><span style="display:flex;"><span>descriptions <span style="color:#f92672">=</span> [(<span style="color:#e6db74">&#39;Epsilon = </span><span style="color:#e6db74">{:0.3f}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(eps) <span style="color:#66d9ef">if</span> eps <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;Input&#39;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> eps <span style="color:#f92672">in</span> epsilons]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, eps <span style="color:#f92672">in</span> enumerate(epsilons):
+</span></span><span style="display:flex;"><span>  adv_x <span style="color:#f92672">=</span> image <span style="color:#f92672">+</span> eps<span style="color:#f92672">*</span>perturbations
+</span></span><span style="display:flex;"><span>  adv_x <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>clip_by_value(adv_x, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>  display_images(adv_x, descriptions[i])
+</span></span></code></pre></div><p><img src="/images/boxer_hacked.png?width=200px" alt="Resize"></p>
+<p>On observe qu&rsquo;avec un coefficient de pertubation de 0.15 le modèle n&rsquo;est plus en mesure de reconnaitre le boxer alors qu&rsquo;un humain est toujours en mesure de le faire.</p>
+
+    </div>
+</div>
+
+            </main>
+        </div>
+
+
+        <footer class="footer">
+    
+        <span>
+            © 2025 Youness Blog, Built with
+            <a href="https://gohugo.io" class="footerLink">Hugo</a> and
+            <a href="https://github.com/LordMathis/hugo-theme-nightfall" class="footerLink">Nightfall</a> theme
+        </span>
+    
+</footer>
+    </div>
+
+</body>
+
+</html>

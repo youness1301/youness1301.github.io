@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on My New Hugo Site</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on My New Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Apr 2025 16:58:29 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vision Models Adversial Attacks</title>
+      <link>http://localhost:1313/posts/ml_vision_models_attacks/</link>
+      <pubDate>Mon, 07 Apr 2025 16:58:29 +0200</pubDate>
+      <guid>http://localhost:1313/posts/ml_vision_models_attacks/</guid>
+      <description>&lt;h1 id=&#34;i-introduction&#34;&gt;I. INTRODUCTION&lt;/h1&gt;&#xA;&lt;p&gt;Avant de voir comment attaquer un modèle de vision il faut revenir sur ce qu&amp;rsquo;est un modèle de vision, à quoi ça sert et comment ça fonctionne.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-quest-ce-quun-modèle-de-vision-&#34;&gt;1. Qu&amp;rsquo;est-ce qu&amp;rsquo;un modèle de vision ?&lt;/h2&gt;&#xA;&lt;p&gt;Un modèle de vision est un type de modèle d&amp;rsquo;intelligence artificielle permettant à un ordianteur de comprendre et interpréter des images ou des vidéos.&lt;/p&gt;&#xA;&lt;p&gt;Un modèle de vision permet notamment :&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;la reconnaissance d&amp;rsquo;objet&lt;/li&gt;&#xA;&lt;li&gt;la segmentation d&amp;rsquo;image&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Les modèles de vision sont couramment utilisés dans les domaines :&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

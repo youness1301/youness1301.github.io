@@ -2,3 +2,23 @@ baseURL = 'https://youness1301.github.io/'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = "nightfall"
+
+  
+
+[params]
+user = "starkjr01"
+math = true
+
+
+
+[params.author]
+    name = "Youness Blog"
+
+[params.styles]
+readingTime = false
+
+[menu]
+  [[menu.header]]
+    name = "posts"
+    weight = 0
+    url = "/posts"
