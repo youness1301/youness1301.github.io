@@ -8,7 +8,7 @@ Vision Models Adversial Attacks | Youness Blog
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Cet article couvre les attaques de type FGSM et One Pixel Attack">
+<meta name="description" content="Cet article couvre les attaques de type FGSM et PGD">
 
 <meta name="generator" content="Hugo 0.145.0">
 
@@ -57,7 +57,7 @@ Vision Models Adversial Attacks | Youness Blog
 <div class="postWrapper">
     <h1>Vision Models Adversial Attacks</h1>
     
-    	<p>Cet article couvre les attaques de type FGSM et One Pixel Attack</p>
+    	<p>Cet article couvre les attaques de type FGSM et PGD</p>
     
     
     <section class="postMetadata">
@@ -72,7 +72,7 @@ Vision Models Adversial Attacks | Youness Blog
             
             
                 <dt>reading time</dt>
-                <dd>7 minutes</dd>
+                <dd>11 minutes</dd>
             
         </dl>
     </section>
@@ -155,11 +155,16 @@ Vision Models Adversial Attacks | Youness Blog
 <p>Maintenant regardons comment attaquer ce genre de modèles.</p>
 <h1 id="ii-attaques-adversiales">II. Attaques Adversiales</h1>
 <p>Une attaque adversariale est une méthode utilisée pour tromper un modèle d&rsquo;apprentissage automatique en modifiant de manière subtile mais ciblée les données d&rsquo;entrée (comme des images, des textes, etc.) de façon à induire une erreur de prédiction. Ces modifications sont généralement invisibles ou imperceptibles pour l&rsquo;humain, mais perturbent suffisamment le modèle pour qu&rsquo;il fasse des erreurs de classification ou de prédiction.</p>
+<p><img src="/images/adversial_exemple.png?width=200px" alt="Resize"></p>
 <p>Ce genre d&rsquo;attaque peuvent avoir de graves concéquences en terme de sécurité. En effet, on peut prendre le cas de l&rsquo;application de modèles de vision pour la conduite autonome de véhicules : si un attaquant parvient à effectuer une attaque adversiale visant à tromper le modèle en ajoutant une légère pertubation sur un panneau de signalisation par exemple, alors la prise de décision du véhicule autonome pour mettre en danger les passagers ainsi que les individus à proximité.</p>
 <h2 id="1-fgsm-fast-gradient-sign-method">1. FGSM (Fast Gradient Sign Method)</h2>
 <p>Le FGSM (Fast Gradient Sign Method) est une méthode d&rsquo;attaque adversariale qui génère des exemples (images dans notre cas) perturbés en utilisant les gradients du modèle pour maximiser la fonction de perte du modèle et aini induire des erreurs de prédiction.</p>
+<p>Prérequis nécessaires à l&rsquo;attaque :</p>
+<ul>
+<li>pocéder le modèle en local (witebox)</li>
+</ul>
 <h3 id="a-principe-théorique">a. Principe théorique</h3>
-<p>L&rsquo;idée est de perturber l&rsquo;entrée xx en ajoutant un bruit ϵϵ (petite perturbation) dans la direction du gradient du modèle par rapport à la perte. Cela provoque une erreur dans la prédiction du modèle tout en créant une modification quasi invisible pour un être humain.</p>
+<p>L&rsquo;idée est de perturber l&rsquo;entrée x en ajoutant un bruit ϵϵ (petite perturbation) dans la direction du gradient du modèle par rapport à la perte. Cela provoque une erreur dans la prédiction du modèle tout en créant une modification quasi invisible pour un être humain.</p>
 <p>Mathématiquement la méthode FGSM se traduit de cette façon :</p>
 <p><img src="/images/FGSM_equa.png?width=200px" alt="Resize"></p>
 <p>Avec :</p>
@@ -224,7 +229,7 @@ Vision Models Adversial Attacks | Youness Blog
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> signed_grad
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the input label of the image.</span>
-</span></span><span style="display:flex;"><span>boxer_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">243</span>
+</span></span><span style="display:flex;"><span>boxer_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">242</span>
 </span></span><span style="display:flex;"><span>label <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>one_hot(boxer_index, image_probs<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
 </span></span><span style="display:flex;"><span>label <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reshape(label, (<span style="color:#ae81ff">1</span>, image_probs<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]))
 </span></span><span style="display:flex;"><span>
@@ -250,7 +255,73 @@ Vision Models Adversial Attacks | Youness Blog
 </span></span><span style="display:flex;"><span>  adv_x <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>clip_by_value(adv_x, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
 </span></span><span style="display:flex;"><span>  display_images(adv_x, descriptions[i])
 </span></span></code></pre></div><p><img src="/images/boxer_hacked.png?width=200px" alt="Resize"></p>
-<p>On observe qu&rsquo;avec un coefficient de pertubation de 0.15 le modèle n&rsquo;est plus en mesure de reconnaitre le boxer alors qu&rsquo;un humain est toujours en mesure de le faire.</p>
+<p>On observe qu&rsquo;avec un coefficient de pertubation de 0.01 le modèle n&rsquo;est plus en mesure de reconnaitre le boxer et reconnais un dogue allemand à la place alors que les perturbations apportées à l&rsquo;image d&rsquo;origine sont presque imperseptibles par un être humain.</p>
+<h2 id="2-pgd-projected-gradient-descent">2. PGD (Projected Gradient Descent)</h2>
+<p>Le PGD (Projected Gradient Descent) est une attaque adversiale visant à dégrader les performances d&rsquo;un modèle de machine learning. Le PGD se base sur la méthode du FGSM expliqué précédement cependant, les perturabations apportées par ce type d&rsquo;attaque sont réparties de manière optimale permettant une modification subtile mais disposant d&rsquo;un fort impact sur la qualité de prédiction du modèle.</p>
+<p>Prérequis nécessaires à l&rsquo;attaque :</p>
+<ul>
+<li>pocéder le modèle en local (witebox)</li>
+</ul>
+<h3 id="a-principe-théorique-1">a. Principe théorique</h3>
+<p>De la même manière que la méthode FGSM décrite précédement, l&rsquo;idée de la méthode FSGM est de modifier une entrée x en y ajoutant une perturbation. Cependant, le PGD, contrairement à la méthode FGSM, est une méthode itérative. En effet le PGD dégrade les performances du modèle en répétant plusieurs fois la méthode FGSM tout en projetant chaque masque de perturbation dans un interval restraint permettant une perturbation subtile sur l&rsquo;intégralité de l&rsquo;image rendant presque indétectable les modifiactions apportées sur l&rsquo;image d&rsquo;origine.</p>
+<p>Pour chaque itération :</p>
+<ul>
+<li>on calcul le gradiant de la fonction de perte par rapport à l&rsquo;image actuelle</li>
+<li>on applique un coefficient de perturbation alpha (learning rate) (de la même manière que le FGSM)</li>
+<li>on projette l&rsquo;image modifiée autour de l&rsquo;image actuel pour apporter des pertubations imperseptibles pour un être humain</li>
+</ul>
+<p>La méthode PGD peut se traduire par la formule suivante :</p>
+<p><img src="/images/PGD_equa.png?width=200px" alt="Resize"></p>
+<p>Avec :</p>
+<ul>
+<li>x_t : image à l&rsquo;étape <em>t</em></li>
+<li>alpha : learning rate (coefficient de perturbation)</li>
+<li>Gradiant(J(teta,x_t,y)) : Gradiant de la fonction de perte par rapport à l&rsquo;entrée</li>
+<li>ΠBϵ​ : Projection de la perturbation au sein de l&rsquo;interval de tolérence de perturbation</li>
+</ul>
+<h3 id="b-démonstration-1">b. Démonstration</h3>
+<p>Implémentons la méthode PGD :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pgd_attack</span>(model, image, label, eps<span style="color:#f92672">=</span><span style="color:#ae81ff">0.03</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.005</span>, iters<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Initialiser avec l’image d’origine + petite perturbation aléatoire</span>
+</span></span><span style="display:flex;"><span>    adv_image <span style="color:#f92672">=</span> image <span style="color:#f92672">+</span> tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(shape<span style="color:#f92672">=</span>image<span style="color:#f92672">.</span>shape, minval<span style="color:#f92672">=-</span>eps, maxval<span style="color:#f92672">=</span>eps)
+</span></span><span style="display:flex;"><span>    adv_image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>clip_by_value(adv_image, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(iters):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>            tape<span style="color:#f92672">.</span>watch(adv_image)
+</span></span><span style="display:flex;"><span>            prediction <span style="color:#f92672">=</span> model(adv_image)
+</span></span><span style="display:flex;"><span>            loss <span style="color:#f92672">=</span> loss_object(label, prediction)
+</span></span><span style="display:flex;"><span>        gradient <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(loss, adv_image)
+</span></span><span style="display:flex;"><span>        adv_image <span style="color:#f92672">=</span> adv_image <span style="color:#f92672">+</span> alpha <span style="color:#f92672">*</span> tf<span style="color:#f92672">.</span>sign(gradient)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Projection : rester dans la &#34;balle&#34; L∞ autour de l’image originale</span>
+</span></span><span style="display:flex;"><span>        perturbation <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>clip_by_value(adv_image <span style="color:#f92672">-</span> image, <span style="color:#f92672">-</span>eps, eps)
+</span></span><span style="display:flex;"><span>        adv_image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>clip_by_value(image <span style="color:#f92672">+</span> perturbation, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> adv_image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>eps <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>  <span style="color:#75715e"># maximum perturbation</span>
+</span></span><span style="display:flex;"><span>alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>  <span style="color:#75715e"># step size</span>
+</span></span><span style="display:flex;"><span>iters <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>  <span style="color:#75715e"># number of iterations</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>adv_image_pgd <span style="color:#f92672">=</span> pgd_attack(pretrained_model, image, label, eps<span style="color:#f92672">=</span>eps, alpha<span style="color:#f92672">=</span>alpha, iters<span style="color:#f92672">=</span>iters)
+</span></span><span style="display:flex;"><span>display_images(adv_image_pgd, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;PGD Attack</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Epsilon=</span><span style="color:#e6db74">{</span>eps<span style="color:#e6db74">}</span><span style="color:#e6db74">, Alpha=</span><span style="color:#e6db74">{</span>alpha<span style="color:#e6db74">}</span><span style="color:#e6db74">, Iters=</span><span style="color:#e6db74">{</span>iters<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><p>Ce qui nous donne :</p>
+<p><img src="/images/PGD_hacked.png?width=200px" alt="Resize"></p>
+<p>On observe que pour des valeures similaires de perturbation, avec seulement 30 itérations, l&rsquo;attaque via méthode PGD a dégradé suffisaement le modèle pour le rendre sûr à 99.14% que le boxer est en réalité un dogue allemand.</p>
+<p><img src="/images/FGSM_vs_PGD.png?width=200px" alt="Resize"></p>
+<p>On observe qu&rsquo;en comparaison avec le FGSM, la méthode PGD induit mieux en erreur le modèle puisque celui-ci prédit une espèce fausse de chien avec plus de confience ainis, la méthode PGD est plus efficasse pour dégrader les perfroamnces d&rsquo;un modèle</p>
+<h1 id="iii-remédiation">III. Remédiation</h1>
+<p>Prémunir les modèles de vision de moyens de défence est un réel défi. Cependant il existe plusieures méchanismes de protections qui peuvent palier à ce genre d&rsquo;ataque</p>
+<h2 id="1-adversial-training">1. Adversial Training</h2>
+<p>L&rsquo;une des méthode les plus efficasse est l&rsquo;adversial training. L&rsquo;adversial training consiste à entrainer le modèle avec des images adversiales en plus des images classiques utilisées pour l&rsquo;entrainement du modèle lui permettant de s&rsquo;habituer à reconnaitre le bon label malgré des perturbations apportées aux images.</p>
+<p>Ainsi, l&rsquo;utilisattion des méthodes FGSM et PGD appliquées aux images servant à l&rsquo;entrainement du modèle permet au modèle de s&rsquo;entrainer à reconnaitre les bons labels malgrés des perturbations apportées aux images  réduisant ainsi l&rsquo;impact des attaques adversiales sur les performances du modèle.</p>
+<p>L&rsquo;avantage de l&rsquo;adversial Training est que le modèle devient très robuste face aux attaques adversiales qu&rsquo;il a déjà &ldquo;vu&rdquo; dans les données servant à l&rsquo;entrainement du modèle. Cependant l&rsquo;inconvéniant d&rsquo;une telle méthode est que le modèle ne devient robuste uniquement face aux attaques adversiales appliquées aux données d&rsquo;entrainement. Ainis, il est difficile de généraliser ce mécanisme de défense à l&rsquo;intégralité des méthodes adversiales.</p>
+<h2 id="2-input-preprocessing">2. Input Preprocessing</h2>
+<p>Une autre méthode défensive contre les attaques adversiales sur des modèles de vision est la mise en place d&rsquo;un mécanisme de nettoyage des images envoyées par l&rsquo;utilisateur. Pour se faire il est possible d&rsquo;implémenter un DAE (Denoising autoencoders). Un DAE est modèle de machine learning permettant d&rsquo;éliminer le bruit présent au sein d&rsquo;une image permettant ainsi de réduire les perturbations causées par des attaques adversiales comme FGSM et PGD et donc de limiter l&rsquo;impacte de celles-ci sur les perforamnces du modèle.</p>
+<p><img src="/images/DAE.png?width=200px" alt="Resize"></p>
+<p>Cependant l&rsquo;utilisation de modèles de Denoised Autoencoder peuvent réduire la qualité des images envoyées par le client et donc baisser la précision du modèle après la phase de nettoyage des images.</p>
+<h1 id="iv-conclusion">IV. Conclusion</h1>
 
     </div>
 </div>

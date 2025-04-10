@@ -1,7 +1,7 @@
 +++
 title = 'Vision Models Adversial Attacks'
 date = 2025-04-07T16:58:29+02:00
-description = 'Cet article couvre les attaques de type FGSM et One Pixel Attack'
+description = 'Cet article couvre les attaques de type FGSM et PGD'
 
 +++
 
@@ -106,15 +106,22 @@ Maintenant regardons comment attaquer ce genre de modèles.
 
 Une attaque adversariale est une méthode utilisée pour tromper un modèle d'apprentissage automatique en modifiant de manière subtile mais ciblée les données d'entrée (comme des images, des textes, etc.) de façon à induire une erreur de prédiction. Ces modifications sont généralement invisibles ou imperceptibles pour l'humain, mais perturbent suffisamment le modèle pour qu'il fasse des erreurs de classification ou de prédiction.
 
-Ce genre d'attaque peuvent avoir de graves concéquences en terme de sécurité. En effet, on peut prendre le cas de l'application de modèles de vision pour la conduite autonome de véhicules : si un attaquant parvient à effectuer une attaque adversiale visant à tromper le modèle en ajoutant une légère pertubation sur un panneau de signalisation par exemple, alors la prise de décision du véhicule autonome pour mettre en danger les passagers ainsi que les individus à proximité.   
+![Resize](/images/adversial_exemple.png?width=200px)
+
+
+Ce genre d'attaque peuvent avoir de graves concéquences en terme de sécurité. En effet, on peut prendre le cas de l'application de modèles de vision pour la conduite autonome de véhicules : si un attaquant parvient à effectuer une attaque adversiale visant à tromper le modèle en ajoutant une légère pertubation sur un panneau de signalisation par exemple, alors la prise de décision du véhicule autonome pour mettre en danger les passagers ainsi que les individus à proximité.
+
 
 ## 1. FGSM (Fast Gradient Sign Method) 
 
 Le FGSM (Fast Gradient Sign Method) est une méthode d'attaque adversariale qui génère des exemples (images dans notre cas) perturbés en utilisant les gradients du modèle pour maximiser la fonction de perte du modèle et aini induire des erreurs de prédiction.
 
+Prérequis nécessaires à l'attaque : 
+- pocéder le modèle en local (witebox) 
+
 ### a. Principe théorique 
 
-L'idée est de perturber l'entrée xx en ajoutant un bruit ϵϵ (petite perturbation) dans la direction du gradient du modèle par rapport à la perte. Cela provoque une erreur dans la prédiction du modèle tout en créant une modification quasi invisible pour un être humain.
+L'idée est de perturber l'entrée x en ajoutant un bruit ϵϵ (petite perturbation) dans la direction du gradient du modèle par rapport à la perte. Cela provoque une erreur dans la prédiction du modèle tout en créant une modification quasi invisible pour un être humain.
 
 Mathématiquement la méthode FGSM se traduit de cette façon : 
 
@@ -199,7 +206,7 @@ def create_adversarial_pattern(input_image, input_label):
   return signed_grad
 
 # Get the input label of the image.
-boxer_index = 243
+boxer_index = 242
 label = tf.one_hot(boxer_index, image_probs.shape[-1])
 label = tf.reshape(label, (1, image_probs.shape[-1]))
 
@@ -236,7 +243,103 @@ for i, eps in enumerate(epsilons):
 
 ![Resize](/images/boxer_hacked.png?width=200px)
 
-On observe qu'avec un coefficient de pertubation de 0.15 le modèle n'est plus en mesure de reconnaitre le boxer alors qu'un humain est toujours en mesure de le faire. 
+On observe qu'avec un coefficient de pertubation de 0.01 le modèle n'est plus en mesure de reconnaitre le boxer et reconnais un dogue allemand à la place alors que les perturbations apportées à l'image d'origine sont presque imperseptibles par un être humain. 
+
+
+## 2. PGD (Projected Gradient Descent)
+
+Le PGD (Projected Gradient Descent) est une attaque adversiale visant à dégrader les performances d'un modèle de machine learning. Le PGD se base sur la méthode du FGSM expliqué précédement cependant, les perturabations apportées par ce type d'attaque sont réparties de manière optimale permettant une modification subtile mais disposant d'un fort impact sur la qualité de prédiction du modèle.
+
+Prérequis nécessaires à l'attaque : 
+- pocéder le modèle en local (witebox) 
+
+### a. Principe théorique 
+
+De la même manière que la méthode FGSM décrite précédement, l'idée de la méthode FSGM est de modifier une entrée x en y ajoutant une perturbation. Cependant, le PGD, contrairement à la méthode FGSM, est une méthode itérative. En effet le PGD dégrade les performances du modèle en répétant plusieurs fois la méthode FGSM tout en projetant chaque masque de perturbation dans un interval restraint permettant une perturbation subtile sur l'intégralité de l'image rendant presque indétectable les modifiactions apportées sur l'image d'origine.  
+
+Pour chaque itération : 
+- on calcul le gradiant de la fonction de perte par rapport à l'image actuelle
+- on applique un coefficient de perturbation alpha (learning rate) (de la même manière que le FGSM)
+- on projette l'image modifiée autour de l'image actuel pour apporter des pertubations imperseptibles pour un être humain  
+
+La méthode PGD peut se traduire par la formule suivante : 
+
+![Resize](/images/PGD_equa.png?width=200px)
+
+Avec :
+
+- x_t : image à l'étape *t*
+- alpha : learning rate (coefficient de perturbation)
+- Gradiant(J(teta,x_t,y)) : Gradiant de la fonction de perte par rapport à l'entrée 
+- ΠBϵ​ : Projection de la perturbation au sein de l'interval de tolérence de perturbation  
+
+
+
+
+### b. Démonstration
+
+Implémentons la méthode PGD : 
+
+```python
+def pgd_attack(model, image, label, eps=0.03, alpha=0.005, iters=40):
+    # Initialiser avec l’image d’origine + petite perturbation aléatoire
+    adv_image = image + tf.random.uniform(shape=image.shape, minval=-eps, maxval=eps)
+    adv_image = tf.clip_by_value(adv_image, -1.0, 1.0)
+
+    for i in range(iters):
+        with tf.GradientTape() as tape:
+            tape.watch(adv_image)
+            prediction = model(adv_image)
+            loss = loss_object(label, prediction)
+        gradient = tape.gradient(loss, adv_image)
+        adv_image = adv_image + alpha * tf.sign(gradient)
+
+        # Projection : rester dans la "balle" L∞ autour de l’image originale
+        perturbation = tf.clip_by_value(adv_image - image, -eps, eps)
+        adv_image = tf.clip_by_value(image + perturbation, -1.0, 1.0)
+
+    return adv_image
+
+eps = 0.01  # maximum perturbation
+alpha = 0.01  # step size
+iters = 30  # number of iterations
+
+adv_image_pgd = pgd_attack(pretrained_model, image, label, eps=eps, alpha=alpha, iters=iters)
+display_images(adv_image_pgd, f'PGD Attack\nEpsilon={eps}, Alpha={alpha}, Iters={iters}')
+```
+Ce qui nous donne : 
+
+![Resize](/images/PGD_hacked.png?width=200px)
+
+On observe que pour des valeures similaires de perturbation, avec seulement 30 itérations, l'attaque via méthode PGD a dégradé suffisaement le modèle pour le rendre sûr à 99.14% que le boxer est en réalité un dogue allemand.
+
+![Resize](/images/FGSM_vs_PGD.png?width=200px)
+
+On observe qu'en comparaison avec le FGSM, la méthode PGD induit mieux en erreur le modèle puisque celui-ci prédit une espèce fausse de chien avec plus de confience ainis, la méthode PGD est plus efficasse pour dégrader les perfroamnces d'un modèle 
+
+# III. Remédiation 
+
+Prémunir les modèles de vision de moyens de défence est un réel défi. Cependant il existe plusieures méchanismes de protections qui peuvent palier à ce genre d'ataque 
+
+## 1. Adversial Training 
+
+L'une des méthode les plus efficasse est l'adversial training. L'adversial training consiste à entrainer le modèle avec des images adversiales en plus des images classiques utilisées pour l'entrainement du modèle lui permettant de s'habituer à reconnaitre le bon label malgré des perturbations apportées aux images. 
+
+Ainsi, l'utilisattion des méthodes FGSM et PGD appliquées aux images servant à l'entrainement du modèle permet au modèle de s'entrainer à reconnaitre les bons labels malgrés des perturbations apportées aux images  réduisant ainsi l'impact des attaques adversiales sur les performances du modèle. 
+
+L'avantage de l'adversial Training est que le modèle devient très robuste face aux attaques adversiales qu'il a déjà "vu" dans les données servant à l'entrainement du modèle. Cependant l'inconvéniant d'une telle méthode est que le modèle ne devient robuste uniquement face aux attaques adversiales appliquées aux données d'entrainement. Ainis, il est difficile de généraliser ce mécanisme de défense à l'intégralité des méthodes adversiales.
+
+## 2. Input Preprocessing 
+
+Une autre méthode défensive contre les attaques adversiales sur des modèles de vision est la mise en place d'un mécanisme de nettoyage des images envoyées par l'utilisateur. Pour se faire il est possible d'implémenter un DAE (Denoising autoencoders). Un DAE est modèle de machine learning permettant d'éliminer le bruit présent au sein d'une image permettant ainsi de réduire les perturbations causées par des attaques adversiales comme FGSM et PGD et donc de limiter l'impacte de celles-ci sur les perforamnces du modèle.
+
+![Resize](/images/DAE.png?width=200px)
+
+Cependant l'utilisation de modèles de Denoised Autoencoder peuvent réduire la qualité des images envoyées par le client et donc baisser la précision du modèle après la phase de nettoyage des images. 
+
+# IV. Conclusion 
+
+
 
 
 
