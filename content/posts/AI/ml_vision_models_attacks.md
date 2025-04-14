@@ -119,7 +119,7 @@ Ce genre d'attaque peut avoir de graves conséquences en termes de sécurité. E
 Le FGSM (Fast Gradient Sign Method) est une méthode d'attaque adversariale qui génère des exemples (images dans notre cas) perturbés en utilisant les gradients du modèle pour maximiser la fonction de perte du modèle et ainsi induire des erreurs de prédiction.
 
 Prérequis nécessaires à l'attaque : 
-- posséder le modèle en local (witebox) 
+- posséder le modèle en local (whitebox) 
 
 ### a. Principe théorique 
 
@@ -252,7 +252,7 @@ On observe qu'avec un coefficient de perturbation de 0.01 le modèle n'est plus 
 Le PGD (Projected Gradient Descent) est une attaque adversiale visant à dégrader les performances d'un modèle de machine learning. Le PGD se base sur la méthode du FGSM expliqué précédemment cependant, les perturbations apportées par ce type d'attaque sont réparties de manière optimale permettant une modification subtile, mais disposant d'un fort impact sur la qualité de prédiction du modèle.
 
 Prérequis nécessaires à l'attaque : 
-- posséder le modèle en local (witebox) 
+- posséder le modèle en local (whitebox) 
 
 ### a. Principe théorique 
 
