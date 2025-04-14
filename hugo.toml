@@ -12,7 +12,32 @@ math = true
 
 
 [params.author]
-    name = "Youness Blog"
+    name = "Cybersec Articles"
+    avatar = "/images/blog_pp.png"
+    
+
+
+
+[[params.social]]
+  key = 0
+  name = "LinkedIn"
+  url = "https://www.linkedin.com/in/youness-lagnaoui-98a6b9231/"
+
+[[params.social]]
+  key = 1
+  name = "github"
+  url = "https://github.com/youness1301"
+
+[[params.social]]
+  key = 1
+  name = "TryHackMe"
+  url = "https://tryhackme.com/p/StarkJr01"
+
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+
 
 [params.styles]
 readingTime = false
@@ -22,3 +47,7 @@ readingTime = false
     name = "posts"
     weight = 0
     url = "/posts"
+  [[menu.header]]
+    name = "about"
+    weight = 0
+    url = "/about"

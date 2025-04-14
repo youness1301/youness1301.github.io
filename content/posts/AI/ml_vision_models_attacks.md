@@ -2,9 +2,10 @@
 title = 'Vision Models Adversial Attacks'
 date = 2025-04-07T16:58:29+02:00
 description = 'Cet article couvre les attaques de type FGSM et PGD'
-
 +++
 
+AUTEUR : Youness LAGNAOUI x CGI BUSINESS CONSULTING 
+ 
 # I. INTRODUCTION
 
 Avant de voir comment attaquer un modèle de vision il faut revenir sur ce qu'est un modèle de vision, à quoi ça sert et comment ça fonctionne. 
@@ -79,7 +80,7 @@ Durant cette phase le modèle apprend, à partir des données d'entrainement, à
 
 Dans le cas de l'entraînement d'un réseau de neurones de convolution, la phase d'entraînement sert à optimiser les différents poids (appelés poids synaptiques) pour classifier avec précision les images qu'il reçoit en entrée du modèle 
 
-### c. évaluation du modèle 
+### c. Evaluation du modèle 
 
 Une fois le modèle entraîné, on peut mesurer ses performances. Pour ce faire on peut utiliser 4 différents types de mesure : 
 
