@@ -15,12 +15,5 @@
       <guid>http://localhost:1313/about/whoami/</guid>
       <description>&lt;p&gt;👋 Bonjour et bienvenue,&lt;/p&gt;&#xA;&lt;p&gt;Je m&amp;rsquo;appelle Youness LAGNAOUI, également connu sous le pseudonyme starkjr01. Ingénieur diplômé de l’ECE Paris, je suis aujourd’hui Pentester chez CGI Business Consulting, où je m’attaque quotidiennement à des problématiques de sécurité complexes.&lt;/p&gt;&#xA;&lt;p&gt;Ma spécialisation porte principalement sur deux domaines clés de la cybersécurité offensive :&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Le pentest d’Intelligences Artificielles : une discipline émergente, au croisement entre innovation technologique et enjeux de sécurité.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Le pentest industriel &amp;amp; IoT : un univers critique souvent sous-estimé, où les failles peuvent avoir des répercussions physiques réelles.&lt;/p&gt;</description>
     </item>
-    <item>
-      <title>Vision Models Adversial Attacks</title>
-      <link>http://localhost:1313/posts/ai/ml_vision_models_attacks/</link>
-      <pubDate>Mon, 07 Apr 2025 16:58:29 +0200</pubDate>
-      <guid>http://localhost:1313/posts/ai/ml_vision_models_attacks/</guid>
-      <description>&lt;p&gt;AUTEUR : Youness LAGNAOUI x CGI BUSINESS CONSULTING&lt;/p&gt;&#xA;&lt;h1 id=&#34;i-introduction&#34;&gt;I. INTRODUCTION&lt;/h1&gt;&#xA;&lt;p&gt;Avant de voir comment attaquer un modèle de vision il faut revenir sur ce qu&amp;rsquo;est un modèle de vision, à quoi ça sert et comment ça fonctionne.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-quest-ce-quun-modèle-de-vision-&#34;&gt;1. Qu&amp;rsquo;est-ce qu&amp;rsquo;un modèle de vision ?&lt;/h2&gt;&#xA;&lt;p&gt;Un modèle de vision est un type de modèle d&amp;rsquo;intelligence artificielle permettant à un ordinateur de comprendre et interpréter des images ou des vidéos.&lt;/p&gt;&#xA;&lt;p&gt;Un modèle de vision permet notamment :&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>
