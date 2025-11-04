@@ -2,7 +2,7 @@
 title = 'Vision Models Adversial Attacks'
 date = 2025-04-07T16:58:29+02:00
 description = 'Cet article couvre les attaques de type FGSM et PGD'
-draft = false
+
 +++
 
 AUTEUR : Youness LAGNAOUI x CGI BUSINESS CONSULTING 
