@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Reverse Firmware on Cybersec Articles</title>
+		<link>http://localhost:1313/tags/reverse-firmware/</link>
+		<description>Recent content in Reverse Firmware on Cybersec Articles</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 09 Aug 2026 12:34:36 -0400</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/reverse-firmware/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Drone Hacking</title>
+				<link>http://localhost:1313/blog/drone-hacking/</link>
+				<pubDate>Sun, 09 Aug 2026 12:34:36 -0400</pubDate>
+				<guid>http://localhost:1313/blog/drone-hacking/</guid>
+				<description>&lt;p&gt;WriteUp : By Youness LAGNAOUI&lt;/p&gt;&#xA;&lt;p&gt;Cet article liste mes étapes de résolution d&amp;rsquo;un challenge de pentest de drone développé par les organisateurs du CTF STARPWN dans le cadre de la DEFCON 34 (&lt;a&#xA;  href=&#34;https://defcon.org/&#34;&#xA;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;  class=&#34;md-link&#34;&#xA;&gt;&#xA;  https://defcon.org/&#xA;&lt;/a&gt;&#xA;)&lt;/p&gt;&#xA;&lt;p&gt;&lt;figure class=&#34;md-image&#34;&gt;&#xA;  &lt;a href=&#34;http://localhost:1313/images/drones/challenge.png?width=200px&#34; class=&#34;glightbox&#34;&gt;&#xA;    &lt;img&#xA;      src=&#34;http://localhost:1313/images/drones/challenge.png?width=200px&#34;&#xA;      alt=&#34;Resize&#34;&#xA;      loading=&#34;lazy&#34;&#xA;    /&gt;&#xA;  &lt;/a&gt;&#xA;  &#xA;&lt;/figure&gt;&#xA;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;Infos mises à dispo :&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Firmware d&amp;rsquo;un drone (qui contient une clé de signature de communication commune aux autres drones au vu de l&amp;rsquo;énoncé)&lt;/li&gt;&#xA;&lt;li&gt;Une interface web qui affiche en temps réel les déplacements ainsi que les status des drones (5 drones)&lt;/li&gt;&#xA;&lt;li&gt;Une connexion &lt;em&gt;MAVlink Telemetry&lt;/em&gt; qui permet d&amp;rsquo;interagir directement avec la navigation des drones&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;Raisonnement de réalisation du challenge :&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

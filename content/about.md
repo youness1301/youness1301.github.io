@@ -6,13 +6,7 @@ draft = false
 
 👋 Bonjour et bienvenue,
 
-Je m'appelle Youness LAGNAOUI, également connu sous le pseudonyme starkjr01. Ingénieur diplômé de l’ECE Paris, je suis aujourd’hui Pentester chez CGI Business Consulting, où je m’attaque quotidiennement à des problématiques de sécurité complexes.
-
-Ma spécialisation porte principalement sur deux domaines clés de la cybersécurité offensive :
-
-- Le pentest d’Intelligences Artificielles : une discipline émergente, au croisement entre innovation technologique et enjeux de sécurité.
-
-- Le pentest industriel & IoT : un univers critique souvent sous-estimé, où les failles peuvent avoir des répercussions physiques réelles.
+Je m'appelle Youness LAGNAOUI, également connu sous le pseudonyme starkjr01. Ingénieur diplômé de l’ECE Paris, je suis aujourd’hui Inspecteur IT au sein de l'Inspection Générale du Groupe BPCE, où je m’attaque quotidiennement à des problématiques de sécurité complexes.
 
 # Pourquoi ce blog ? 
 

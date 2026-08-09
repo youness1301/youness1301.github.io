@@ -1,53 +1,75 @@
 baseURL = 'https://youness1301.github.io/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = "nightfall"
+title = 'Cybersec Articles'
+theme = "minimal-black"
 
-  
+
+
 
 [params]
-user = "starkjr01"
-math = true
-
-
-
-[params.author]
+  user = "starkjr01"
+  math = true
+  favicon = "images/blog_pp.png"
+  appleTouchIcon = "images/blog_pp.png"
+  [params.theme]
+    defaultTheme = "dark" 
+  [params.author]
     name = "Cybersec Articles"
     avatar = "/images/blog_pp.png"
     
+    # Hero Section
+    [params.hero]
+      badge = "Offensive Security Enthusiast"
+      title = "Bienvenue sur Cybersec Articles"
+      role = "Je m'appelle Youness LAGNAOUI, également connu sous le pseudonyme starkjr01. Ingénieur diplômé de l’ECE Paris, je suis aujourd’hui Inspecteur IT au sein de l'Inspection Générale du Groupe BPCE"
+      summary = "J’ai lancé ce blog avec une intention simple mais essentielle : mettre en lumière des domaines encore trop peu explorés de la cybersécurité offensive. Je souhaite partager ici des cas concrets, des retours d’expérience, des outils, et des réflexions sur des thématiques souvent considérées comme de niche."
+      location = "Paris, France"
 
+      [params.hero.primary]
+        label = "View projects"
+        href = "/projects/"
+
+      [params.hero.secondary]
+        label = "Read the blog"
+        href = "/blog/"
 
 
 [[params.social]]
-  key = 0
-  name = "LinkedIn"
+  label = "LinkedIn"
   url = "https://www.linkedin.com/in/youness-lagnaoui-98a6b9231/"
+  icon = "fa-brands fa-linkedin-in"
 
 [[params.social]]
-  key = 1
-  name = "github"
+  label = "GitHub"
   url = "https://github.com/youness1301"
+  icon = "fa-brands fa-github"
 
 [[params.social]]
-  key = 1
-  name = "TryHackMe"
+  label = "TryHackMe"
   url = "https://tryhackme.com/p/StarkJr01"
 
+[[params.social]]
+  label = "Hack The Box"
+  url = "https://app.hackthebox.com/users/1019787"
 
 [markup.goldmark.renderer]
   unsafe = true
 
 
-
-[params.styles]
-readingTime = false
-
 [menu]
-  [[menu.header]]
-    name = "posts"
-    weight = 0
-    url = "/posts"
-  [[menu.header]]
-    name = "about"
-    weight = 0
-    url = "/about"
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 3
+
+

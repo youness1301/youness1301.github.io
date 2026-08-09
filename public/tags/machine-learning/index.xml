@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Machine Learning on Cybersec Articles</title>
+		<link>http://localhost:1313/tags/machine-learning/</link>
+		<description>Recent content in Machine Learning on Cybersec Articles</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 07 Apr 2025 16:58:29 +0200</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Vision Models Adversial Attacks</title>
+				<link>http://localhost:1313/blog/ai/ml_vision_models_attacks/</link>
+				<pubDate>Mon, 07 Apr 2025 16:58:29 +0200</pubDate>
+				<guid>http://localhost:1313/blog/ai/ml_vision_models_attacks/</guid>
+				<description>&lt;p&gt;AUTHOR : LAGNAOUI Youness&lt;/p&gt;&#xA;&lt;h1 id=&#34;i-introduction&#34;&gt;&#xA;  &lt;a href=&#34;#i-introduction&#34; class=&#34;md-heading-anchor&#34;&gt;&#xA;    I. INTRODUCTION&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Avant de voir comment attaquer un modèle de vision il faut revenir sur ce qu&amp;rsquo;est un modèle de vision, à quoi ça sert et comment ça fonctionne.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-quest-ce-quun-modèle-de-vision-&#34;&gt;&#xA;  &lt;a href=&#34;#1-quest-ce-quun-mod%c3%a8le-de-vision-&#34; class=&#34;md-heading-anchor&#34;&gt;&#xA;    1. Qu&amp;rsquo;est-ce qu&amp;rsquo;un modèle de vision ?&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Un modèle de vision est un type de modèle d&amp;rsquo;intelligence artificielle permettant à un ordinateur de comprendre et interpréter des images ou des vidéos.&lt;/p&gt;&#xA;&lt;p&gt;Un modèle de vision permet notamment :&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
