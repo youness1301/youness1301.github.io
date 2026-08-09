@@ -1,7 +1,6 @@
 +++
 title = 'Drone Hacking'
 date = 2026-08-09T12:34:36-04:00
-draft = true
 description = "Cet article se base sur la résolution d'un challenge de cyber sécurité : STARPWN organisé à la DEFCON 34"
 tags = ["CTF", "Sécurité Offensive", "Reverse Firmware", "MAVLink protocole"]
 categories = ["CTF Writeup"]
