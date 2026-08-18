@@ -159,7 +159,7 @@ Interceptons si d'éventuelles requêtes sont émises par l'application web divu
 
 ![Resize](/images/drones/request2.png?width=200px) 
 
-Une série de web socket est transmises vers l'application web divulguant les ID des différents drones confirmant que chacun des drones possèdes possèdent un ID déductible (ex drone 1 : sysid 1 ; drone 3 : sysid 3 etc....). 
+Une série de web socket est transmises vers l'application web divulguant les ID des différents drones confirmant que chacun des drones possèdent un ID déductible (ex drone 1 : sysid 1 ; drone 3 : sysid 3 etc....). 
 
 
 
@@ -435,7 +435,7 @@ print("\n[*] Fin.")
 
 On peut lister les dossier présents sur le drone 1. 
 
-Listons les fichiers présents au sein de ces fichiers pour voir si le flag se trouve dedans : 
+Listons les fichiers présents au sein de ces dossiers pour voir si le flag se trouve dedans : 
 
 ```python
 import os
@@ -537,7 +537,7 @@ starpwn{machines_never_pledged_to_be_allegiant}
 # (Bonus) Prendre le contrôle des drones : 
 
 
-Pour aller au delà de la résolution du challenge qui consistait à exfiltrer les images prises par les drones directement via protocole MAVLinkFTP après récupération de clé de chiffrement des communication des drones. Il est possible maintenant de prendre le controle des drones pour par exemple : 
+Pour aller au delà de la résolution du challenge qui consistait à exfiltrer les images prises par les drones directement via protocole MAVLinkFTP après récupération de clé de chiffrement des communications des drones. Il est possible maintenant de prendre le controle des drones pour effectuer ce type d'actions : 
 
 - Modifier les instructions de pilotage automatique 
 - Piloter les drones à distance 
@@ -546,7 +546,7 @@ Pour aller au delà de la résolution du challenge qui consistait à exfiltrer l
 
 ## 1. Modification des instructions de pilotage automatique
 
-La version la plus discrète pour modifier les instructions de pilotage automatique des drones et de volontairement leurs envoyer l'indication qu'ils sont déjà la fin de leur parcours en forçant les valeurs des **Waypoints**. 
+La version la plus discrète pour modifier les instructions de pilotage automatique des drones est de volontairement leurs envoyer l'indication qu'ils sont déjà à la fin de leurs parcours en forçant les valeurs des **Waypoints**. 
 
 Les Waypoints correspondent aux différentes étapes (coordonnées spatiales en l'occurrence) que le drone doit atteindre et qui constituent le parcours que celui-ci doit effectuer. 
 
