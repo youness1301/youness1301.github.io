@@ -544,7 +544,7 @@ Pour aller au delà de la résolution du challenge qui consistait à exfiltrer l
 - Mettre hors service les drones 
 
 
-## 1. Modification des instructions de pilotage automatique
+## 4. Modification des instructions de pilotage automatique
 
 La version la plus discrète pour modifier les instructions de pilotage automatique des drones est de volontairement leurs envoyer l'indication qu'ils sont déjà à la fin de leurs parcours en forçant les valeurs des **Waypoints**. 
 
@@ -705,7 +705,7 @@ Les *Waypoints* sont bien mis à leurs valeurs maximales et les drones ont brusq
 Les drones sont maintenant immobilisés en plein milieu de leurs séquence d'autopilotage. 
 
 
-## 2. Pilotage manuel des drones : 
+## 5. Pilotage manuel des drones : 
 
 On peut passer le mode de pilotage des drones en Manuel et envoyer des actions aux drones : 
 
@@ -845,7 +845,7 @@ print("[*] Terminé.")
 
 
 
-## 3. Désactivation des drones
+## 6. Désactivation des drones
 
 On peut éteindre les drones en plein vole en "désarmant" les drones : 
 
@@ -921,7 +921,7 @@ print("\n[*] Terminé.")
 
 
 
-## 4. Déni de service 
+## 7. Déni de service 
 
 
 Afin de prendre 100% le contrôle des drones il est possible de modifier la clé de signature des drones afin de mettre sa propre clé. Ainsi seulement l'attaquant peut avoir accès aux contrôles des drones : 
