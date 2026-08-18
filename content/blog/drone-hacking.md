@@ -136,7 +136,7 @@ Cette clé permet de signer toutes les communications entre les drones.
 
 # Etape 2 : Collecte d'informations opérationnelles 
 
-## 1. identification des ID MAVLink des drones : 
+## 1. identification des ID MAVLink des drones 
 
 Nous avons accès à une interface web qui donne des indications sur la postions et le statuts des différents drones : 
 
@@ -163,7 +163,7 @@ Une série de web socket est transmises vers l'application web divulguant les ID
 
 
 
-## 2. Identification des trajets automatiques des drones : 
+## 2. Identification des trajets automatiques des drones
 
 Maintenant que nous avons les sysid des drones nous pouvons tester si la clé que nous avons obtenue à l'étape précédente est correcte en développant un script python qui s'interface directement avec la connexion TCP : 
 
@@ -369,7 +369,7 @@ Dans le cadre du challenge les informations d'états et de position des drones n
 
 Essayons donc d'exfiltrer des informations qui pourraient être contenues à l'intérieur des drones : 
 
-## 3. Extraction des fichiers présents au sein des drones : 
+## 3. Extraction des fichiers présents au sein des drones 
 
 Parmis les actions pas en lien avec la navigation et l'état des drones, une action intéressante est possible via le MAVLink protocole : **Extraire les fichiers contenus au sein des drones via FTP**:
 
@@ -534,7 +534,7 @@ starpwn{machines_never_pledged_to_be_allegiant}
 
 
 
-# (Bonus) Prendre le contrôle des drones : 
+# (Bonus) Prendre le contrôle des drones 
 
 
 Pour aller au delà de la résolution du challenge qui consistait à exfiltrer les images prises par les drones directement via protocole MAVLinkFTP après récupération de clé de chiffrement des communications des drones. Il est possible maintenant de prendre le controle des drones pour effectuer ce type d'actions : 
@@ -705,7 +705,7 @@ Les *Waypoints* sont bien mis à leurs valeurs maximales et les drones ont brusq
 Les drones sont maintenant immobilisés en plein milieu de leurs séquence d'autopilotage. 
 
 
-## 5. Pilotage manuel des drones : 
+## 5. Pilotage manuel des drones
 
 On peut passer le mode de pilotage des drones en Manuel et envoyer des actions aux drones : 
 
