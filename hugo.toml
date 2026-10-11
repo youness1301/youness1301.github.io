@@ -11,6 +11,8 @@ theme = "minimal-black"
   math = true
   favicon = "images/blog_ppvf2.png"
   appleTouchIcon = "images/blog_ppvf2.png"
+  # Logo (optional)
+  logo = "images/blog_ppvf2.png"
   [params.theme]
     defaultTheme = "dark" 
   [params.author]
@@ -71,5 +73,6 @@ theme = "minimal-black"
     name = "Blog"
     url = "/blog/"
     weight = 3
+
 
 
