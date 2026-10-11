@@ -736,9 +736,9 @@
     Etape 2 : Collecte d&rsquo;informations opérationnelles
   </a>
 </h1>
-<h2 id="1-identification-des-id-mavlink-des-drones-">
-  <a href="#1-identification-des-id-mavlink-des-drones-" class="md-heading-anchor">
-    1. identification des ID MAVLink des drones :
+<h2 id="1-identification-des-id-mavlink-des-drones">
+  <a href="#1-identification-des-id-mavlink-des-drones" class="md-heading-anchor">
+    1. identification des ID MAVLink des drones
   </a>
 </h2>
 <p>Nous avons accès à une interface web qui donne des indications sur la postions et le statuts des différents drones :</p>
@@ -794,10 +794,10 @@
   
 </figure>
 </p>
-<p>Une série de web socket est transmises vers l&rsquo;application web divulguant les ID des différents drones confirmant que chacun des drones possèdes possèdent un ID déductible (ex drone 1 : sysid 1 ; drone 3 : sysid 3 etc&hellip;.).</p>
-<h2 id="2-identification-des-trajets-automatiques-des-drones-">
-  <a href="#2-identification-des-trajets-automatiques-des-drones-" class="md-heading-anchor">
-    2. Identification des trajets automatiques des drones :
+<p>Une série de web socket est transmises vers l&rsquo;application web divulguant les ID des différents drones confirmant que chacun des drones possèdent un ID déductible (ex drone 1 : sysid 1 ; drone 3 : sysid 3 etc&hellip;.).</p>
+<h2 id="2-identification-des-trajets-automatiques-des-drones">
+  <a href="#2-identification-des-trajets-automatiques-des-drones" class="md-heading-anchor">
+    2. Identification des trajets automatiques des drones
   </a>
 </h2>
 <p>Maintenant que nous avons les sysid des drones nous pouvons tester si la clé que nous avons obtenue à l&rsquo;étape précédente est correcte en développant un script python qui s&rsquo;interface directement avec la connexion TCP :</p>
@@ -1612,9 +1612,9 @@
 <p>On a pu extraire les itinéraires complets des drones. Grace à ce genre d&rsquo;information on peut prédire à l&rsquo;avance à quel endroit sera un drone.</p>
 <p>Dans le cadre du challenge les informations d&rsquo;états et de position des drones ne permettent pas de récupérer le flag.</p>
 <p>Essayons donc d&rsquo;exfiltrer des informations qui pourraient être contenues à l&rsquo;intérieur des drones :</p>
-<h2 id="3-extraction-des-fichiers-présents-au-sein-des-drones-">
-  <a href="#3-extraction-des-fichiers-pr%c3%a9sents-au-sein-des-drones-" class="md-heading-anchor">
-    3. Extraction des fichiers présents au sein des drones :
+<h2 id="3-extraction-des-fichiers-présents-au-sein-des-drones">
+  <a href="#3-extraction-des-fichiers-pr%c3%a9sents-au-sein-des-drones" class="md-heading-anchor">
+    3. Extraction des fichiers présents au sein des drones
   </a>
 </h2>
 <p>Parmis les actions pas en lien avec la navigation et l&rsquo;état des drones, une action intéressante est possible via le MAVLink protocole : <strong>Extraire les fichiers contenus au sein des drones via FTP</strong>:</p>
@@ -1987,7 +1987,7 @@
 </figure>
 </p>
 <p>On peut lister les dossier présents sur le drone 1.</p>
-<p>Listons les fichiers présents au sein de ces fichiers pour voir si le flag se trouve dedans :</p>
+<p>Listons les fichiers présents au sein de ces dossiers pour voir si le flag se trouve dedans :</p>
 <div class="mb-codeblock" id="cb-4b227777" data-lang="python">
   
   <div class="mb-codeblock-header">
@@ -3001,23 +3001,23 @@
   background: color-mix(in srgb, #cb171e 25%, transparent);
   color: #cb171e;
 }
-</style><h1 id="bonus-prendre-le-contrôle-des-drones-">
-  <a href="#bonus-prendre-le-contr%c3%b4le-des-drones-" class="md-heading-anchor">
-    (Bonus) Prendre le contrôle des drones :
+</style><h1 id="bonus-prendre-le-contrôle-des-drones">
+  <a href="#bonus-prendre-le-contr%c3%b4le-des-drones" class="md-heading-anchor">
+    (Bonus) Prendre le contrôle des drones
   </a>
 </h1>
-<p>Pour aller au delà de la résolution du challenge qui consistait à exfiltrer les images prises par les drones directement via protocole MAVLinkFTP après récupération de clé de chiffrement des communication des drones. Il est possible maintenant de prendre le controle des drones pour par exemple :</p>
+<p>Pour aller au delà de la résolution du challenge qui consistait à exfiltrer les images prises par les drones directement via protocole MAVLinkFTP après récupération de clé de chiffrement des communications des drones. Il est possible maintenant de prendre le controle des drones pour effectuer ce type d&rsquo;actions :</p>
 <ul>
 <li>Modifier les instructions de pilotage automatique</li>
 <li>Piloter les drones à distance</li>
 <li>Mettre hors service les drones</li>
 </ul>
-<h2 id="1-modification-des-instructions-de-pilotage-automatique">
-  <a href="#1-modification-des-instructions-de-pilotage-automatique" class="md-heading-anchor">
-    1. Modification des instructions de pilotage automatique
+<h2 id="4-modification-des-instructions-de-pilotage-automatique">
+  <a href="#4-modification-des-instructions-de-pilotage-automatique" class="md-heading-anchor">
+    4. Modification des instructions de pilotage automatique
   </a>
 </h2>
-<p>La version la plus discrète pour modifier les instructions de pilotage automatique des drones et de volontairement leurs envoyer l&rsquo;indication qu&rsquo;ils sont déjà la fin de leur parcours en forçant les valeurs des <strong>Waypoints</strong>.</p>
+<p>La version la plus discrète pour modifier les instructions de pilotage automatique des drones est de volontairement leurs envoyer l&rsquo;indication qu&rsquo;ils sont déjà à la fin de leurs parcours en forçant les valeurs des <strong>Waypoints</strong>.</p>
 <p>Les Waypoints correspondent aux différentes étapes (coordonnées spatiales en l&rsquo;occurrence) que le drone doit atteindre et qui constituent le parcours que celui-ci doit effectuer.</p>
 <p>Ainsi si on envoie directement aux drones qu&rsquo;ils sont au dernier Waypoint alors on trompe les drones en leur indiquant qu&rsquo;ils sont à la fin de leurs parcours, forçant ainsi leurs retours à leurs points d&rsquo;origine :</p>
 <p><figure class="md-image">
@@ -3512,9 +3512,9 @@
 </figure>
 </p>
 <p>Les drones sont maintenant immobilisés en plein milieu de leurs séquence d&rsquo;autopilotage.</p>
-<h2 id="2-pilotage-manuel-des-drones-">
-  <a href="#2-pilotage-manuel-des-drones-" class="md-heading-anchor">
-    2. Pilotage manuel des drones :
+<h2 id="5-pilotage-manuel-des-drones">
+  <a href="#5-pilotage-manuel-des-drones" class="md-heading-anchor">
+    5. Pilotage manuel des drones
   </a>
 </h2>
 <p>On peut passer le mode de pilotage des drones en Manuel et envoyer des actions aux drones :</p>
@@ -3961,9 +3961,9 @@
   
 </figure>
 </p>
-<h2 id="3-désactivation-des-drones">
-  <a href="#3-d%c3%a9sactivation-des-drones" class="md-heading-anchor">
-    3. Désactivation des drones
+<h2 id="6-désactivation-des-drones">
+  <a href="#6-d%c3%a9sactivation-des-drones" class="md-heading-anchor">
+    6. Désactivation des drones
   </a>
 </h2>
 <p>On peut éteindre les drones en plein vole en &ldquo;désarmant&rdquo; les drones :</p>
@@ -4360,9 +4360,9 @@
   
 </figure>
 </p>
-<h2 id="4-déni-de-service">
-  <a href="#4-d%c3%a9ni-de-service" class="md-heading-anchor">
-    4. Déni de service
+<h2 id="7-déni-de-service">
+  <a href="#7-d%c3%a9ni-de-service" class="md-heading-anchor">
+    7. Déni de service
   </a>
 </h2>
 <p>Afin de prendre 100% le contrôle des drones il est possible de modifier la clé de signature des drones afin de mettre sa propre clé. Ainsi seulement l&rsquo;attaquant peut avoir accès aux contrôles des drones :</p>
@@ -4789,16 +4789,16 @@
             <nav class="toc-nav">
               <nav id="TableOfContents">
   <ul>
-    <li><a href="#1-identification-des-id-mavlink-des-drones-">1. identification des ID MAVLink des drones :</a></li>
-    <li><a href="#2-identification-des-trajets-automatiques-des-drones-">2. Identification des trajets automatiques des drones :</a></li>
-    <li><a href="#3-extraction-des-fichiers-présents-au-sein-des-drones-">3. Extraction des fichiers présents au sein des drones :</a></li>
+    <li><a href="#1-identification-des-id-mavlink-des-drones">1. identification des ID MAVLink des drones</a></li>
+    <li><a href="#2-identification-des-trajets-automatiques-des-drones">2. Identification des trajets automatiques des drones</a></li>
+    <li><a href="#3-extraction-des-fichiers-présents-au-sein-des-drones">3. Extraction des fichiers présents au sein des drones</a></li>
   </ul>
 
   <ul>
-    <li><a href="#1-modification-des-instructions-de-pilotage-automatique">1. Modification des instructions de pilotage automatique</a></li>
-    <li><a href="#2-pilotage-manuel-des-drones-">2. Pilotage manuel des drones :</a></li>
-    <li><a href="#3-désactivation-des-drones">3. Désactivation des drones</a></li>
-    <li><a href="#4-déni-de-service">4. Déni de service</a></li>
+    <li><a href="#4-modification-des-instructions-de-pilotage-automatique">4. Modification des instructions de pilotage automatique</a></li>
+    <li><a href="#5-pilotage-manuel-des-drones">5. Pilotage manuel des drones</a></li>
+    <li><a href="#6-désactivation-des-drones">6. Désactivation des drones</a></li>
+    <li><a href="#7-déni-de-service">7. Déni de service</a></li>
   </ul>
 </nav>
             </nav>

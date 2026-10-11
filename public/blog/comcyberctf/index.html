@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<html lang="en"
+  data-cb-collapse-enabled=""
+  data-cb-collapse-default=""
+  data-cb-collapse-lines=""
+  data-cb-collapse-auto-height=""
+  data-cb-collapse-collapsed-height="">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>COMCYBER CTF | Cybersec Articles</title>
+
+<meta name="description" content="Cet article se base sur la résolution d&#39;un challenge de cyber sécurité développé par le Commandement de la Cyber Défense (COMCYBER)" />
+<meta name="author" content="map[avatar:/images/blog_pp.png name:Cybersec Articles]" />
+
+
+
+
+  <link rel="icon" type="image/x-icon" href="/images/blog_pp.png" />
+
+
+
+
+  <link rel="apple-touch-icon" href="/home/remnux/Articles/youness1301.github.io/content/blog/COMCYBERCTF.md" />
+
+
+
+
+  
+    
+  
+    
+  
+
+
+<link rel="stylesheet" href="/css/main.css"> 
+
+
+
+
+
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+/>
+
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/justified-gallery@3.8.2/dist/css/justifiedGallery.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: "dark" });
+</script>
+
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var systemDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var defaultTheme =
+        'dark';
+
+      var theme =
+        stored ||
+        (defaultTheme === "dark"
+          ? "dark"
+          : defaultTheme === "light"
+          ? "light"
+          : systemDark
+          ? "dark"
+          : "light");
+
+      document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+
+
+
+
+  </head>
+  <body class="min-h-screen bg-bg text-text antialiased">
+    <div class="flex min-h-screen flex-col">
+      <header class="pt-6">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    
+    <div class="nav-shell">
+      <div class="nav-inner">
+        
+        <a href="/" class="flex items-center gap-2">
+          
+            <div class="logo-badge">
+              CY
+            </div>
+          
+          <span class="text-xs font-semibold tracking-wide">
+            Cybersec Articles
+          </span>
+        </a>
+
+        <div class="flex items-center gap-2">
+          
+          <nav class="hidden items-center gap-5 md:flex">
+              <a
+                href="/"
+                class="nav-link link-underline flex items-center gap-1 "
+              >
+                
+                <span>Home</span>
+              </a>
+              <a
+                href="/about/"
+                class="nav-link link-underline flex items-center gap-1 "
+              >
+                
+                <span>About</span>
+              </a>
+              <a
+                href="/blog/"
+                class="nav-link link-underline flex items-center gap-1 "
+              >
+                
+                <span>Blog</span>
+              </a>
+          </nav>
+
+          
+          <button
+  type="button"
+  class="theme-toggle"
+  aria-label="Toggle dark mode"
+  data-theme-toggle
+>
+  <span data-theme-icon-light style="display: none">
+    
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path
+        d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364-1.414 1.414M8.05 15.95l-1.414 1.414m0-11.314L8.05 8.05m9.9 9.9-1.414-1.414"
+      />
+    </svg>
+  </span>
+
+  <span data-theme-icon-dark>
+    
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M21 12.79A9 9 0 0 1 12.21 3 7 7 0 1 0 21 12.79z" />
+    </svg>
+  </span>
+</button>
+
+
+          
+          <button
+            type="button"
+            class="ml-1 inline-flex items-center justify-center rounded-full border border-border bg-bg p-2 text-muted shadow-sm hover:text-accent md:hidden"
+            aria-label="Toggle navigation"
+            data-mobile-nav-toggle
+          >
+            <span class="sr-only">Open navigation</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="18" x2="20" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="mx-auto mt-2 max-w-7xl px-4 sm:px-6 md:hidden">
+    <nav
+      class="hidden rounded-2xl border border-border bg-surface px-4 py-3 text-sm text-muted shadow-md"
+      data-mobile-nav
+    >
+      
+        <a href="/" class="flex items-center gap-2 py-1.5">
+          
+          <span>Home</span>
+        </a>
+      
+        <a href="/about/" class="flex items-center gap-2 py-1.5">
+          
+          <span>About</span>
+        </a>
+      
+        <a href="/blog/" class="flex items-center gap-2 py-1.5">
+          
+          <span>Blog</span>
+        </a>
+      
+    </nav>
+  </div>
+</header>
+
+
+      <main class="flex-1">
+        
+  <section class="layout-page section-stack">
+    <div class="article-layout">
+      <article class="article-main space-y-4">
+        <header class="space-y-2">
+          <h1 class="heading-page text-2xl sm:text-3xl">COMCYBER CTF</h1>
+
+          <div class="text-[0.75rem] text-muted">
+            
+              <span>09 Aug 2026</span>
+            
+            
+              <span> • 4 min read</span>
+            
+          </div>
+
+          
+            <p class="max-w-xl text-sm text-muted">
+              Cet article se base sur la résolution d&#39;un challenge de cyber sécurité développé par le Commandement de la Cyber Défense (COMCYBER)
+            </p>
+          
+        </header>
+
+        <div class="card card-pad">
+          <div class="markdown-body">
+            <p>WriteUp : By Youness LAGNAOUI</p>
+<p>Cet article se base sur la résolution du challenge développé par le Commandement de la Cyber Defense (COMCYBER) dans le cadre des campagnes de recrutement. Le challenge est accessible via Root Me à l&rsquo;adresse : <a
+  href="https://www.root-me.org/fr/Challenges/Realiste/ComCyber-Challenge"
+  target="_blank" rel="noopener"
+  class="md-link"
+>
+  https://www.root-me.org/fr/Challenges/Realiste/ComCyber-Challenge
+</a>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/0.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/0.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<h2 id="mission-1--post-mortem-communication-véhicule">
+  <a href="#mission-1--post-mortem-communication-v%c3%a9hicule" class="md-heading-anchor">
+    Mission 1 : Post-mortem communication véhicule
+  </a>
+</h2>
+<p><figure class="md-image">
+  <a href="/images/comcyber/1.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/1.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/2.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/2.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/3.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/3.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Nous avons à notre disposition une capture réseau correspondant à une communication via protocole TELNET avec le véhicule.</p>
+<p>TELNET est un protocole non chiffré nous permettant de lire directement le contenu des trames échangées !</p>
+<p>Effectuons un focus sur les dernières trames pour identifier ce qui a causé la perte de contact avec le véhicule :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/4.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/4.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>On observe que l&rsquo;intégralité des communications TELNET peut être lue, nous permettant d&rsquo;identifier un couple username / mot de passe :</p>
+<div class="mb-codeblock" id="cb-5feceb66" data-lang="text">
+  
+  <div class="mb-codeblock-header">
+    <div class="mb-codeblock-left">
+      <span class="mb-codeblock-badge">
+        TEXT
+      </span></div>
+
+    <div class="mb-codeblock-actions"><button class="mb-action-btn mb-collapse-btn" data-collapsed="false" aria-label="Collapse code">
+          <i class="fas fa-compress-alt"></i>
+          <span>Collapse</span>
+        </button><button class="mb-action-btn mb-copy-btn" aria-label="Copy code">
+        <i class="fas fa-copy"></i>
+        <span>Copy</span>
+      </button>
+    </div>
+  </div>
+
+  
+  <div 
+    class="mb-codeblock-content" 
+    data-state="expanded"
+  >
+    <pre tabindex="0"><code>root:vlR0IQwJL60RGQvA8ne2mopXZk</code></pre><div class="mb-collapse-overlay">
+        <button class="mb-expand-trigger">
+          <i class="fas fa-chevron-down"></i>
+          <span>Click to expand</span>
+        </button>
+      </div></div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  const codeblock = document.getElementById('cb-5feceb66');
+  if (!codeblock) return;
+
+  const copyBtn = codeblock.querySelector('.mb-copy-btn');
+  const collapseBtn = codeblock.querySelector('.mb-collapse-btn');
+  const content = codeblock.querySelector('.mb-codeblock-content');
+  const overlay = codeblock.querySelector('.mb-collapse-overlay');
+  const expandTrigger = overlay?.querySelector('.mb-expand-trigger');
+
+  
+  
+  
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      let codeText = '';
+
+      
+      const codeCell = codeblock.querySelector('.lntd:last-child code');
+      if (codeCell) {
+        codeText = codeCell.textContent || codeCell.innerText || '';
+      } else {
+        
+        const codeEl = codeblock.querySelector('pre code');
+        codeText = codeEl ? (codeEl.textContent || codeEl.innerText || '') : '';
+      }
+
+      try {
+        await navigator.clipboard.writeText(codeText.trim());
+        
+        
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        copyBtn.classList.add('mb-btn-success');
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHTML;
+          copyBtn.classList.remove('mb-btn-success');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+        
+        
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText.trim();
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>Copy</span>';
+          }, 2000);
+        } catch (fallbackErr) {
+          console.error('Fallback copy failed:', fallbackErr);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+    });
+  }
+
+  
+  
+  
+  if (collapseBtn && content && overlay) {
+    const collapsedHeight =  200 ;
+    
+    function toggleCollapse() {
+      const isCollapsed = content.dataset.state === 'collapsed';
+      
+      if (isCollapsed) {
+        
+        content.style.maxHeight = '';
+        content.style.overflow = '';
+        content.dataset.state = 'expanded';
+        overlay.style.display = 'none';
+        collapseBtn.innerHTML = '<i class="fas fa-compress-alt"></i><span>Collapse</span>';
+        collapseBtn.dataset.collapsed = 'false';
+      } else {
+        
+        content.style.maxHeight = collapsedHeight + 'px';
+        content.style.overflow = 'hidden';
+        content.dataset.state = 'collapsed';
+        overlay.style.display = 'flex';
+        collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+        collapseBtn.dataset.collapsed = 'true';
+      }
+    }
+
+    
+    if ('expanded' === 'collapsed') {
+      content.dataset.state = 'collapsed';
+      overlay.style.display = 'flex';
+      collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+      collapseBtn.dataset.collapsed = 'true';
+    }
+
+    collapseBtn.addEventListener('click', toggleCollapse);
+    
+    if (expandTrigger) {
+      expandTrigger.addEventListener('click', toggleCollapse);
+    }
+  }
+})();
+</script>
+
+<style>
+ 
+
+.mb-codeblock-filename {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.mb-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.4rem;
+  transition: all 0.15s ease-out;
+  font-family: inherit;
+}
+
+.mb-action-btn:hover {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.mb-action-btn:active {
+  transform: translateY(0);
+}
+
+.mb-action-btn i {
+  font-size: 0.7rem;
+}
+
+.mb-btn-success {
+  color: #22c55e !important;
+  border-color: #22c55e !important;
+  background: color-mix(in srgb, #22c55e 12%, transparent) !important;
+}
+
+.mb-collapse-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mb-expand-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+.mb-expand-trigger:hover {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+
+.mb-expand-trigger i {
+  font-size: 0.7rem;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+ 
+.mb-codeblock[data-lang="javascript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="js"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #f7df1e 25%, transparent);
+  color: #f7df1e;
+}
+
+.mb-codeblock[data-lang="typescript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="ts"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3178c6 25%, transparent);
+  color: #3178c6;
+}
+
+.mb-codeblock[data-lang="python"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="py"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3776ab 25%, transparent);
+  color: #3776ab;
+}
+
+.mb-codeblock[data-lang="go"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #00add8 25%, transparent);
+  color: #00add8;
+}
+
+.mb-codeblock[data-lang="rust"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="rs"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #ce422b 25%, transparent);
+  color: #ce422b;
+}
+
+.mb-codeblock[data-lang="html"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #e34c26 25%, transparent);
+  color: #e34c26;
+}
+
+.mb-codeblock[data-lang="css"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #264de4 25%, transparent);
+  color: #264de4;
+}
+
+.mb-codeblock[data-lang="bash"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="sh"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="shell"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #4eaa25 25%, transparent);
+  color: #4eaa25;
+}
+
+.mb-codeblock[data-lang="json"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #000000 25%, transparent);
+  color: #dddddd;
+}
+
+.mb-codeblock[data-lang="yaml"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="yml"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #cb171e 25%, transparent);
+  color: #cb171e;
+}
+</style><p><figure class="md-image">
+  <a href="/images/comcyber/5.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/5.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Finalement, on n&rsquo;observe pas grand-chose de si intéressant au sein des communications TELNET qui permettrait d&rsquo;expliquer la perte de connexion au véhicule.</p>
+<p>Les connexions TELNET sont un rabbit hole.</p>
+<p>Analysons les autres types de communication que nous avons : les communications UDP :</p>
+<p>En prenant un paquet UDP aléatoire, on obtient :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/6.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/6.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Analysons le dernier paquet UDP transmis au véhicule :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/7.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/7.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Cette trame UDP nous donne l&rsquo;indication de nous connecter à l&rsquo;adresse IP :</p>
+<div class="mb-codeblock" id="cb-6b86b273" data-lang="text">
+  
+  <div class="mb-codeblock-header">
+    <div class="mb-codeblock-left">
+      <span class="mb-codeblock-badge">
+        TEXT
+      </span></div>
+
+    <div class="mb-codeblock-actions"><button class="mb-action-btn mb-collapse-btn" data-collapsed="false" aria-label="Collapse code">
+          <i class="fas fa-compress-alt"></i>
+          <span>Collapse</span>
+        </button><button class="mb-action-btn mb-copy-btn" aria-label="Copy code">
+        <i class="fas fa-copy"></i>
+        <span>Copy</span>
+      </button>
+    </div>
+  </div>
+
+  
+  <div 
+    class="mb-codeblock-content" 
+    data-state="expanded"
+  >
+    <pre tabindex="0"><code>212.129.38.224:53036</code></pre><div class="mb-collapse-overlay">
+        <button class="mb-expand-trigger">
+          <i class="fas fa-chevron-down"></i>
+          <span>Click to expand</span>
+        </button>
+      </div></div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  const codeblock = document.getElementById('cb-6b86b273');
+  if (!codeblock) return;
+
+  const copyBtn = codeblock.querySelector('.mb-copy-btn');
+  const collapseBtn = codeblock.querySelector('.mb-collapse-btn');
+  const content = codeblock.querySelector('.mb-codeblock-content');
+  const overlay = codeblock.querySelector('.mb-collapse-overlay');
+  const expandTrigger = overlay?.querySelector('.mb-expand-trigger');
+
+  
+  
+  
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      let codeText = '';
+
+      
+      const codeCell = codeblock.querySelector('.lntd:last-child code');
+      if (codeCell) {
+        codeText = codeCell.textContent || codeCell.innerText || '';
+      } else {
+        
+        const codeEl = codeblock.querySelector('pre code');
+        codeText = codeEl ? (codeEl.textContent || codeEl.innerText || '') : '';
+      }
+
+      try {
+        await navigator.clipboard.writeText(codeText.trim());
+        
+        
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        copyBtn.classList.add('mb-btn-success');
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHTML;
+          copyBtn.classList.remove('mb-btn-success');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+        
+        
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText.trim();
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>Copy</span>';
+          }, 2000);
+        } catch (fallbackErr) {
+          console.error('Fallback copy failed:', fallbackErr);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+    });
+  }
+
+  
+  
+  
+  if (collapseBtn && content && overlay) {
+    const collapsedHeight =  200 ;
+    
+    function toggleCollapse() {
+      const isCollapsed = content.dataset.state === 'collapsed';
+      
+      if (isCollapsed) {
+        
+        content.style.maxHeight = '';
+        content.style.overflow = '';
+        content.dataset.state = 'expanded';
+        overlay.style.display = 'none';
+        collapseBtn.innerHTML = '<i class="fas fa-compress-alt"></i><span>Collapse</span>';
+        collapseBtn.dataset.collapsed = 'false';
+      } else {
+        
+        content.style.maxHeight = collapsedHeight + 'px';
+        content.style.overflow = 'hidden';
+        content.dataset.state = 'collapsed';
+        overlay.style.display = 'flex';
+        collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+        collapseBtn.dataset.collapsed = 'true';
+      }
+    }
+
+    
+    if ('expanded' === 'collapsed') {
+      content.dataset.state = 'collapsed';
+      overlay.style.display = 'flex';
+      collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+      collapseBtn.dataset.collapsed = 'true';
+    }
+
+    collapseBtn.addEventListener('click', toggleCollapse);
+    
+    if (expandTrigger) {
+      expandTrigger.addEventListener('click', toggleCollapse);
+    }
+  }
+})();
+</script>
+
+<style>
+ 
+
+.mb-codeblock-filename {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.mb-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.4rem;
+  transition: all 0.15s ease-out;
+  font-family: inherit;
+}
+
+.mb-action-btn:hover {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.mb-action-btn:active {
+  transform: translateY(0);
+}
+
+.mb-action-btn i {
+  font-size: 0.7rem;
+}
+
+.mb-btn-success {
+  color: #22c55e !important;
+  border-color: #22c55e !important;
+  background: color-mix(in srgb, #22c55e 12%, transparent) !important;
+}
+
+.mb-collapse-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mb-expand-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+.mb-expand-trigger:hover {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+
+.mb-expand-trigger i {
+  font-size: 0.7rem;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+ 
+.mb-codeblock[data-lang="javascript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="js"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #f7df1e 25%, transparent);
+  color: #f7df1e;
+}
+
+.mb-codeblock[data-lang="typescript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="ts"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3178c6 25%, transparent);
+  color: #3178c6;
+}
+
+.mb-codeblock[data-lang="python"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="py"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3776ab 25%, transparent);
+  color: #3776ab;
+}
+
+.mb-codeblock[data-lang="go"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #00add8 25%, transparent);
+  color: #00add8;
+}
+
+.mb-codeblock[data-lang="rust"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="rs"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #ce422b 25%, transparent);
+  color: #ce422b;
+}
+
+.mb-codeblock[data-lang="html"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #e34c26 25%, transparent);
+  color: #e34c26;
+}
+
+.mb-codeblock[data-lang="css"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #264de4 25%, transparent);
+  color: #264de4;
+}
+
+.mb-codeblock[data-lang="bash"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="sh"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="shell"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #4eaa25 25%, transparent);
+  color: #4eaa25;
+}
+
+.mb-codeblock[data-lang="json"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #000000 25%, transparent);
+  color: #dddddd;
+}
+
+.mb-codeblock[data-lang="yaml"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="yml"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #cb171e 25%, transparent);
+  color: #cb171e;
+}
+</style><h2 id="mission-2--accéder-au-tableau-de-bord">
+  <a href="#mission-2--acc%c3%a9der-au-tableau-de-bord" class="md-heading-anchor">
+    Mission 2 : Accéder au tableau de bord
+  </a>
+</h2>
+<p><figure class="md-image">
+  <a href="/images/comcyber/8.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/8.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>On tombe sur une mire d&rsquo;authentification.</p>
+<p>Essayons les techniques de bypass de login classiques de type injection SQL pour voir si ça passe :</p>
+<div class="mb-codeblock" id="cb-d4735e3a" data-lang="text">
+  
+  <div class="mb-codeblock-header">
+    <div class="mb-codeblock-left">
+      <span class="mb-codeblock-badge">
+        TEXT
+      </span></div>
+
+    <div class="mb-codeblock-actions"><button class="mb-action-btn mb-collapse-btn" data-collapsed="false" aria-label="Collapse code">
+          <i class="fas fa-compress-alt"></i>
+          <span>Collapse</span>
+        </button><button class="mb-action-btn mb-copy-btn" aria-label="Copy code">
+        <i class="fas fa-copy"></i>
+        <span>Copy</span>
+      </button>
+    </div>
+  </div>
+
+  
+  <div 
+    class="mb-codeblock-content" 
+    data-state="expanded"
+  >
+    <pre tabindex="0"><code>Username = &#39; OR 1=1; --</code></pre><div class="mb-collapse-overlay">
+        <button class="mb-expand-trigger">
+          <i class="fas fa-chevron-down"></i>
+          <span>Click to expand</span>
+        </button>
+      </div></div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  const codeblock = document.getElementById('cb-d4735e3a');
+  if (!codeblock) return;
+
+  const copyBtn = codeblock.querySelector('.mb-copy-btn');
+  const collapseBtn = codeblock.querySelector('.mb-collapse-btn');
+  const content = codeblock.querySelector('.mb-codeblock-content');
+  const overlay = codeblock.querySelector('.mb-collapse-overlay');
+  const expandTrigger = overlay?.querySelector('.mb-expand-trigger');
+
+  
+  
+  
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      let codeText = '';
+
+      
+      const codeCell = codeblock.querySelector('.lntd:last-child code');
+      if (codeCell) {
+        codeText = codeCell.textContent || codeCell.innerText || '';
+      } else {
+        
+        const codeEl = codeblock.querySelector('pre code');
+        codeText = codeEl ? (codeEl.textContent || codeEl.innerText || '') : '';
+      }
+
+      try {
+        await navigator.clipboard.writeText(codeText.trim());
+        
+        
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        copyBtn.classList.add('mb-btn-success');
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHTML;
+          copyBtn.classList.remove('mb-btn-success');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+        
+        
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText.trim();
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>Copy</span>';
+          }, 2000);
+        } catch (fallbackErr) {
+          console.error('Fallback copy failed:', fallbackErr);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+    });
+  }
+
+  
+  
+  
+  if (collapseBtn && content && overlay) {
+    const collapsedHeight =  200 ;
+    
+    function toggleCollapse() {
+      const isCollapsed = content.dataset.state === 'collapsed';
+      
+      if (isCollapsed) {
+        
+        content.style.maxHeight = '';
+        content.style.overflow = '';
+        content.dataset.state = 'expanded';
+        overlay.style.display = 'none';
+        collapseBtn.innerHTML = '<i class="fas fa-compress-alt"></i><span>Collapse</span>';
+        collapseBtn.dataset.collapsed = 'false';
+      } else {
+        
+        content.style.maxHeight = collapsedHeight + 'px';
+        content.style.overflow = 'hidden';
+        content.dataset.state = 'collapsed';
+        overlay.style.display = 'flex';
+        collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+        collapseBtn.dataset.collapsed = 'true';
+      }
+    }
+
+    
+    if ('expanded' === 'collapsed') {
+      content.dataset.state = 'collapsed';
+      overlay.style.display = 'flex';
+      collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+      collapseBtn.dataset.collapsed = 'true';
+    }
+
+    collapseBtn.addEventListener('click', toggleCollapse);
+    
+    if (expandTrigger) {
+      expandTrigger.addEventListener('click', toggleCollapse);
+    }
+  }
+})();
+</script>
+
+<style>
+ 
+
+.mb-codeblock-filename {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.mb-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.4rem;
+  transition: all 0.15s ease-out;
+  font-family: inherit;
+}
+
+.mb-action-btn:hover {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.mb-action-btn:active {
+  transform: translateY(0);
+}
+
+.mb-action-btn i {
+  font-size: 0.7rem;
+}
+
+.mb-btn-success {
+  color: #22c55e !important;
+  border-color: #22c55e !important;
+  background: color-mix(in srgb, #22c55e 12%, transparent) !important;
+}
+
+.mb-collapse-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mb-expand-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+.mb-expand-trigger:hover {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+
+.mb-expand-trigger i {
+  font-size: 0.7rem;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+ 
+.mb-codeblock[data-lang="javascript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="js"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #f7df1e 25%, transparent);
+  color: #f7df1e;
+}
+
+.mb-codeblock[data-lang="typescript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="ts"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3178c6 25%, transparent);
+  color: #3178c6;
+}
+
+.mb-codeblock[data-lang="python"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="py"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3776ab 25%, transparent);
+  color: #3776ab;
+}
+
+.mb-codeblock[data-lang="go"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #00add8 25%, transparent);
+  color: #00add8;
+}
+
+.mb-codeblock[data-lang="rust"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="rs"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #ce422b 25%, transparent);
+  color: #ce422b;
+}
+
+.mb-codeblock[data-lang="html"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #e34c26 25%, transparent);
+  color: #e34c26;
+}
+
+.mb-codeblock[data-lang="css"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #264de4 25%, transparent);
+  color: #264de4;
+}
+
+.mb-codeblock[data-lang="bash"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="sh"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="shell"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #4eaa25 25%, transparent);
+  color: #4eaa25;
+}
+
+.mb-codeblock[data-lang="json"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #000000 25%, transparent);
+  color: #dddddd;
+}
+
+.mb-codeblock[data-lang="yaml"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="yml"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #cb171e 25%, transparent);
+  color: #cb171e;
+}
+</style><p><figure class="md-image">
+  <a href="/images/comcyber/9.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/9.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/10.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/10.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>On a bien contourné le mécanisme d&rsquo;authentification via injection SQL. On accède à un dashboard permettant de lister les véhicules déployés. Parmi cette liste, un véhicule apparaît comme compromis et inaccessible : le véhicule <strong>GOLIATH</strong> :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/11.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/11.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Nous avons 2 options de contrôle réalisables :</p>
+<ul>
+<li><em>Enable Comunications</em></li>
+<li><em>Get last logs</em></li>
+</ul>
+<p>Quand on clique sur <em>Enable Comunications</em>, on obtient cette fenêtre demandant un mot de passe d&rsquo;activation :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/12.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/12.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Testons le mot de passe que nous avons pu identifier dans les échanges TELNET de la première étape du challenge :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/12_2.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/12_2.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Code non validé&hellip;</p>
+<p>Lorsque nous cliquons sur &ldquo;Get last logs&rdquo;, on obtient cette fenêtre :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/13.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/13.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>qui nous permet de télécharger ce fichier .log contenant des logs système d&rsquo;une machine Linux :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/14.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/14.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Cherchons les commandes système effectuées sur cette machine en filtrant sur le préfixe <strong>CMD</strong> :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/15.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/15.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>On observe la présence d&rsquo;une commande visant à stocker la chaîne de caractères <code>efa3fb1f409aa622dddd7220ad6567580fb68b68</code> en tant que potentiel password.</p>
+<p>On observe que l&rsquo;attaquant a téléchargé sur le serveur COMCYBER un fichier nommé <strong>m4lw3r3</strong> depuis son serveur (<code>attacker[.]tld</code>) et l&rsquo;a zippé avec le mot de passe <code>efa3fb1f409aa622dddd7220ad6567580fb68b68</code>.</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/16.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/16.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>On observe également que le fichier Zip contenant le fameux fichier <strong>m4lw3r3</strong> se situe au sein de l&rsquo;image favicon.ico du site :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/17.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/17.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Téléchargeons le fichier favicon.ico afin d&rsquo;observer ce qu&rsquo;il y a dedans :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/18.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/18.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/19.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/19.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>En inspectant le contenu des deux fichiers obtenus grâce à l&rsquo;utilitaire binwalk, on observe que le fichier <strong>favicon.ico.1</strong> contient une archive zip contenant les 2 fichiers :</p>
+<ul>
+<li>message.txt</li>
+<li>m4lw4r3</li>
+</ul>
+<p>Effectuons une extraction de ces fichiers grâce à binwalk :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/20.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/20.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/21.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/21.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Les fichiers ne sont pas directement accessibles car ils n&rsquo;ont pas été extraits depuis le zip protégé par mot de passe.</p>
+<p>Faisons une extraction du zip avec le mot de passe identifié dans les logs : <code>efa3fb1f409aa622dddd7220ad6567580fb68b68</code> :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/22.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/22.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Maintenant nous avons bien accès à notre fameux fichier <strong>m4lw3r3</strong> qui nous intéresse.</p>
+<h2 id="mission-3--reverse-engineering-malware">
+  <a href="#mission-3--reverse-engineering-malware" class="md-heading-anchor">
+    Mission 3 : Reverse Engineering Malware
+  </a>
+</h2>
+<p>Nous avons maintenant à notre disposition le malware qui a été responsable de la perte de connexion avec le véhicule <strong>GOLIATH</strong>. Analysons-le :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/23.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/23.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>On peut constater que c&rsquo;est un binaire Linux non strippé, ce qui va faciliter l&rsquo;analyse statique du binaire.</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/24.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/24.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Dans les chaînes de caractères du binaire, on peut observer une chaîne chiffrée (peut-être la chaîne de caractères à déchiffrer pour finir le challenge ?)</p>
+<p>Utilisons Ghidra pour analyser plus en détail le binaire :</p>
+<p>Le binaire prend en entrée 2 inputs :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/24_2.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/24_2.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/25.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/25.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Le binaire fait une vérification de signature <strong>RSA brute (RSA_NO_PADDING)</strong> avec une clé publique <code>(n, e)</code> embarquée.</p>
+<ol>
+<li><strong>input1</strong> doit être égal à une chaîne fixe stockée dans la table <code>strs</code> (indice 77) :
+<code>6762f71489bb7b57bbdaabd1306a677bbcf25bd7</code> → sinon <code>input1 FAILED</code>.</li>
+<li>Cette chaîne est répétée par <code>strncat</code> jusqu&rsquo;à <strong>128 octets</strong> → c&rsquo;est le message <code>tbs</code>.</li>
+<li><strong>input2</strong> est décodé depuis l&rsquo;hex → c&rsquo;est la <strong>signature</strong>. Le binaire fait <code>EVP_PKEY_verify</code> avec padding <code>3</code> (= <code>RSA_NO_PADDING</code>), donc il teste simplement <code>sig^e mod n == tbs</code>.</li>
+<li>Si les deux passent → il affiche <code>You should be able to decrypt this: 0x39c4…</code> (un chiffré 1024 bits).</li>
+</ol>
+<p><code>e</code> fait <strong>1024 bits</strong> (presque aussi grand que <code>n</code>). On tombe dans un cas classique de clé vulnérable aux attaques de <strong>Wiener</strong> (fractions continues de <code>e/n</code>).</p>
+<p>Demandons à Claude de nous faire les calculs pour retrouver le secret final :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/26.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/26.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/27.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/27.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>On obtient la chaîne de caractères :</p>
+<div class="mb-codeblock" id="cb-4e074085" data-lang="text">
+  
+  <div class="mb-codeblock-header">
+    <div class="mb-codeblock-left">
+      <span class="mb-codeblock-badge">
+        TEXT
+      </span></div>
+
+    <div class="mb-codeblock-actions"><button class="mb-action-btn mb-collapse-btn" data-collapsed="false" aria-label="Collapse code">
+          <i class="fas fa-compress-alt"></i>
+          <span>Collapse</span>
+        </button><button class="mb-action-btn mb-copy-btn" aria-label="Copy code">
+        <i class="fas fa-copy"></i>
+        <span>Copy</span>
+      </button>
+    </div>
+  </div>
+
+  
+  <div 
+    class="mb-codeblock-content" 
+    data-state="expanded"
+  >
+    <pre tabindex="0"><code>3302758350382e964f2931b596c5abe2</code></pre><div class="mb-collapse-overlay">
+        <button class="mb-expand-trigger">
+          <i class="fas fa-chevron-down"></i>
+          <span>Click to expand</span>
+        </button>
+      </div></div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  const codeblock = document.getElementById('cb-4e074085');
+  if (!codeblock) return;
+
+  const copyBtn = codeblock.querySelector('.mb-copy-btn');
+  const collapseBtn = codeblock.querySelector('.mb-collapse-btn');
+  const content = codeblock.querySelector('.mb-codeblock-content');
+  const overlay = codeblock.querySelector('.mb-collapse-overlay');
+  const expandTrigger = overlay?.querySelector('.mb-expand-trigger');
+
+  
+  
+  
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      let codeText = '';
+
+      
+      const codeCell = codeblock.querySelector('.lntd:last-child code');
+      if (codeCell) {
+        codeText = codeCell.textContent || codeCell.innerText || '';
+      } else {
+        
+        const codeEl = codeblock.querySelector('pre code');
+        codeText = codeEl ? (codeEl.textContent || codeEl.innerText || '') : '';
+      }
+
+      try {
+        await navigator.clipboard.writeText(codeText.trim());
+        
+        
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        copyBtn.classList.add('mb-btn-success');
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHTML;
+          copyBtn.classList.remove('mb-btn-success');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+        
+        
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText.trim();
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>Copy</span>';
+          }, 2000);
+        } catch (fallbackErr) {
+          console.error('Fallback copy failed:', fallbackErr);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+    });
+  }
+
+  
+  
+  
+  if (collapseBtn && content && overlay) {
+    const collapsedHeight =  200 ;
+    
+    function toggleCollapse() {
+      const isCollapsed = content.dataset.state === 'collapsed';
+      
+      if (isCollapsed) {
+        
+        content.style.maxHeight = '';
+        content.style.overflow = '';
+        content.dataset.state = 'expanded';
+        overlay.style.display = 'none';
+        collapseBtn.innerHTML = '<i class="fas fa-compress-alt"></i><span>Collapse</span>';
+        collapseBtn.dataset.collapsed = 'false';
+      } else {
+        
+        content.style.maxHeight = collapsedHeight + 'px';
+        content.style.overflow = 'hidden';
+        content.dataset.state = 'collapsed';
+        overlay.style.display = 'flex';
+        collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+        collapseBtn.dataset.collapsed = 'true';
+      }
+    }
+
+    
+    if ('expanded' === 'collapsed') {
+      content.dataset.state = 'collapsed';
+      overlay.style.display = 'flex';
+      collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+      collapseBtn.dataset.collapsed = 'true';
+    }
+
+    collapseBtn.addEventListener('click', toggleCollapse);
+    
+    if (expandTrigger) {
+      expandTrigger.addEventListener('click', toggleCollapse);
+    }
+  }
+})();
+</script>
+
+<style>
+ 
+
+.mb-codeblock-filename {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.mb-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.4rem;
+  transition: all 0.15s ease-out;
+  font-family: inherit;
+}
+
+.mb-action-btn:hover {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.mb-action-btn:active {
+  transform: translateY(0);
+}
+
+.mb-action-btn i {
+  font-size: 0.7rem;
+}
+
+.mb-btn-success {
+  color: #22c55e !important;
+  border-color: #22c55e !important;
+  background: color-mix(in srgb, #22c55e 12%, transparent) !important;
+}
+
+.mb-collapse-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mb-expand-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+.mb-expand-trigger:hover {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+
+.mb-expand-trigger i {
+  font-size: 0.7rem;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+ 
+.mb-codeblock[data-lang="javascript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="js"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #f7df1e 25%, transparent);
+  color: #f7df1e;
+}
+
+.mb-codeblock[data-lang="typescript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="ts"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3178c6 25%, transparent);
+  color: #3178c6;
+}
+
+.mb-codeblock[data-lang="python"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="py"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3776ab 25%, transparent);
+  color: #3776ab;
+}
+
+.mb-codeblock[data-lang="go"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #00add8 25%, transparent);
+  color: #00add8;
+}
+
+.mb-codeblock[data-lang="rust"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="rs"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #ce422b 25%, transparent);
+  color: #ce422b;
+}
+
+.mb-codeblock[data-lang="html"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #e34c26 25%, transparent);
+  color: #e34c26;
+}
+
+.mb-codeblock[data-lang="css"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #264de4 25%, transparent);
+  color: #264de4;
+}
+
+.mb-codeblock[data-lang="bash"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="sh"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="shell"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #4eaa25 25%, transparent);
+  color: #4eaa25;
+}
+
+.mb-codeblock[data-lang="json"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #000000 25%, transparent);
+  color: #dddddd;
+}
+
+.mb-codeblock[data-lang="yaml"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="yml"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #cb171e 25%, transparent);
+  color: #cb171e;
+}
+</style><p>Vérifions que cela permet de rétablir le contact avec le véhicule <strong>GOLIATH</strong> :</p>
+<p><figure class="md-image">
+  <a href="/images/comcyber/28.png?width=200px" class="glightbox">
+    <img
+      src="/images/comcyber/28.png?width=200px"
+      alt="Resize"
+      loading="lazy"
+    />
+  </a>
+  
+</figure>
+</p>
+<p>Communication avec le véhicule <strong>GOLIATH</strong> rétablie.</p>
+<p>Flag final :</p>
+<div class="mb-codeblock" id="cb-4b227777" data-lang="text">
+  
+  <div class="mb-codeblock-header">
+    <div class="mb-codeblock-left">
+      <span class="mb-codeblock-badge">
+        TEXT
+      </span></div>
+
+    <div class="mb-codeblock-actions"><button class="mb-action-btn mb-collapse-btn" data-collapsed="false" aria-label="Collapse code">
+          <i class="fas fa-compress-alt"></i>
+          <span>Collapse</span>
+        </button><button class="mb-action-btn mb-copy-btn" aria-label="Copy code">
+        <i class="fas fa-copy"></i>
+        <span>Copy</span>
+      </button>
+    </div>
+  </div>
+
+  
+  <div 
+    class="mb-codeblock-content" 
+    data-state="expanded"
+  >
+    <pre tabindex="0"><code>RM{F33ling_L1k3_4_R34l_Ag3nT!}</code></pre><div class="mb-collapse-overlay">
+        <button class="mb-expand-trigger">
+          <i class="fas fa-chevron-down"></i>
+          <span>Click to expand</span>
+        </button>
+      </div></div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  const codeblock = document.getElementById('cb-4b227777');
+  if (!codeblock) return;
+
+  const copyBtn = codeblock.querySelector('.mb-copy-btn');
+  const collapseBtn = codeblock.querySelector('.mb-collapse-btn');
+  const content = codeblock.querySelector('.mb-codeblock-content');
+  const overlay = codeblock.querySelector('.mb-collapse-overlay');
+  const expandTrigger = overlay?.querySelector('.mb-expand-trigger');
+
+  
+  
+  
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      let codeText = '';
+
+      
+      const codeCell = codeblock.querySelector('.lntd:last-child code');
+      if (codeCell) {
+        codeText = codeCell.textContent || codeCell.innerText || '';
+      } else {
+        
+        const codeEl = codeblock.querySelector('pre code');
+        codeText = codeEl ? (codeEl.textContent || codeEl.innerText || '') : '';
+      }
+
+      try {
+        await navigator.clipboard.writeText(codeText.trim());
+        
+        
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        copyBtn.classList.add('mb-btn-success');
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHTML;
+          copyBtn.classList.remove('mb-btn-success');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+        
+        
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText.trim();
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>Copy</span>';
+          }, 2000);
+        } catch (fallbackErr) {
+          console.error('Fallback copy failed:', fallbackErr);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+    });
+  }
+
+  
+  
+  
+  if (collapseBtn && content && overlay) {
+    const collapsedHeight =  200 ;
+    
+    function toggleCollapse() {
+      const isCollapsed = content.dataset.state === 'collapsed';
+      
+      if (isCollapsed) {
+        
+        content.style.maxHeight = '';
+        content.style.overflow = '';
+        content.dataset.state = 'expanded';
+        overlay.style.display = 'none';
+        collapseBtn.innerHTML = '<i class="fas fa-compress-alt"></i><span>Collapse</span>';
+        collapseBtn.dataset.collapsed = 'false';
+      } else {
+        
+        content.style.maxHeight = collapsedHeight + 'px';
+        content.style.overflow = 'hidden';
+        content.dataset.state = 'collapsed';
+        overlay.style.display = 'flex';
+        collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+        collapseBtn.dataset.collapsed = 'true';
+      }
+    }
+
+    
+    if ('expanded' === 'collapsed') {
+      content.dataset.state = 'collapsed';
+      overlay.style.display = 'flex';
+      collapseBtn.innerHTML = '<i class="fas fa-expand-alt"></i><span>Expand</span>';
+      collapseBtn.dataset.collapsed = 'true';
+    }
+
+    collapseBtn.addEventListener('click', toggleCollapse);
+    
+    if (expandTrigger) {
+      expandTrigger.addEventListener('click', toggleCollapse);
+    }
+  }
+})();
+</script>
+
+<style>
+ 
+
+.mb-codeblock-filename {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.mb-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.4rem;
+  transition: all 0.15s ease-out;
+  font-family: inherit;
+}
+
+.mb-action-btn:hover {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.mb-action-btn:active {
+  transform: translateY(0);
+}
+
+.mb-action-btn i {
+  font-size: 0.7rem;
+}
+
+.mb-btn-success {
+  color: #22c55e !important;
+  border-color: #22c55e !important;
+  background: color-mix(in srgb, #22c55e 12%, transparent) !important;
+}
+
+.mb-collapse-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mb-expand-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+.mb-expand-trigger:hover {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+
+.mb-expand-trigger i {
+  font-size: 0.7rem;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+ 
+.mb-codeblock[data-lang="javascript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="js"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #f7df1e 25%, transparent);
+  color: #f7df1e;
+}
+
+.mb-codeblock[data-lang="typescript"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="ts"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3178c6 25%, transparent);
+  color: #3178c6;
+}
+
+.mb-codeblock[data-lang="python"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="py"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #3776ab 25%, transparent);
+  color: #3776ab;
+}
+
+.mb-codeblock[data-lang="go"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #00add8 25%, transparent);
+  color: #00add8;
+}
+
+.mb-codeblock[data-lang="rust"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="rs"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #ce422b 25%, transparent);
+  color: #ce422b;
+}
+
+.mb-codeblock[data-lang="html"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #e34c26 25%, transparent);
+  color: #e34c26;
+}
+
+.mb-codeblock[data-lang="css"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #264de4 25%, transparent);
+  color: #264de4;
+}
+
+.mb-codeblock[data-lang="bash"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="sh"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="shell"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #4eaa25 25%, transparent);
+  color: #4eaa25;
+}
+
+.mb-codeblock[data-lang="json"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #000000 25%, transparent);
+  color: #dddddd;
+}
+
+.mb-codeblock[data-lang="yaml"] .mb-codeblock-badge,
+.mb-codeblock[data-lang="yml"] .mb-codeblock-badge {
+  background: color-mix(in srgb, #cb171e 25%, transparent);
+  color: #cb171e;
+}
+</style>
+          </div>
+        </div>
+      </article>
+
+      
+        <aside class="article-toc">
+          <div class="toc-wrapper">
+            <div class="toc-header">
+              <h3 class="toc-title">
+                <i class="fas fa-list-ul"></i>
+                <span>Table of Contents</span>
+              </h3>
+              <button class="toc-toggle" aria-label="Toggle table of contents">
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            <nav class="toc-nav">
+              <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mission-1--post-mortem-communication-véhicule">Mission 1 : Post-mortem communication véhicule</a></li>
+    <li><a href="#mission-2--accéder-au-tableau-de-bord">Mission 2 : Accéder au tableau de bord</a></li>
+    <li><a href="#mission-3--reverse-engineering-malware">Mission 3 : Reverse Engineering Malware</a></li>
+  </ul>
+</nav>
+            </nav>
+          </div>
+        </aside>
+
+        <script>
+        (function() {
+          'use strict';
+
+          const tocWrapper = document.querySelector('.toc-wrapper');
+          const tocToggle = document.querySelector('.toc-toggle');
+          const tocNav = document.querySelector('.toc-nav');
+          const tocLinks = document.querySelectorAll('.toc-nav a');
+
+          if (!tocWrapper || !tocNav) return;
+
+          
+          
+          
+          if (tocToggle) {
+            tocToggle.addEventListener('click', function() {
+              tocWrapper.classList.toggle('collapsed');
+            });
+          }
+
+          
+          
+          
+          tocLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetId = this.getAttribute('href');
+              const targetElement = document.querySelector(targetId);
+
+              if (targetElement) {
+                const yOffset = -80; 
+                const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+                window.scrollTo({
+                  top: y,
+                  behavior: 'smooth'
+                });
+
+                
+                history.pushState(null, null, targetId);
+              }
+            });
+          });
+
+          
+          
+          
+          const headings = document.querySelectorAll('.markdown-body h1[id], .markdown-body h2[id], .markdown-body h3[id], .markdown-body h4[id], .markdown-body h5[id], .markdown-body h6[id]');
+
+          let activeHeading = null;
+          const observer = new IntersectionObserver(
+            (entries) => {
+              
+              const intersectingHeadings = [];
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  intersectingHeadings.push({
+                    element: entry.target,
+                    top: entry.boundingClientRect.top
+                  });
+                }
+              });
+
+              
+              if (intersectingHeadings.length > 0) {
+                
+                intersectingHeadings.sort((a, b) => Math.abs(a.top) - Math.abs(b.top));
+
+                const closestHeading = intersectingHeadings[0].element;
+                const id = closestHeading.getAttribute('id');
+
+                if (id && id !== activeHeading) {
+                  activeHeading = id;
+                  const tocLink = document.querySelector(`.toc-nav a[href="#${id}"]`);
+
+                  if (tocLink) {
+                    
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    
+                    tocLink.classList.add('active');
+                  }
+                }
+              }
+            },
+            {
+              rootMargin: '-80px 0px -80%',
+              threshold: [0, 0.25, 0.5, 0.75, 1]
+            }
+          );
+
+          
+          headings.forEach((heading) => {
+            observer.observe(heading);
+          });
+
+          
+          if (tocLinks.length > 0) {
+            tocLinks[0].classList.add('active');
+            activeHeading = tocLinks[0].getAttribute('href').substring(1);
+          }
+        })();
+        </script>
+      
+    </div>
+  </section>
+
+      </main>
+
+      <footer class="pb-6 pt-10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="footer-shell">
+      <div class="footer-inner">
+        
+        <div class="space-y-1">
+          <p class="footer-small">
+            &copy; 2026 Cybersec Articles — All rights
+            reserved.
+          </p>
+
+          <p class="footer-small flex flex-wrap items-center gap-1">
+            <span>Built with</span>
+
+            <a
+              href="https://gohugo.io/"
+              class="footer-link footer-float link-underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Hugo</span>
+            </a>
+
+            <span>/</span>
+
+            <a
+              href=""
+              class="footer-link footer-float link-underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Minimal&nbsp;Black</span>
+            </a>
+          </p>
+        </div>
+
+        
+        
+        <div class="footer-links">
+          
+          <a
+            href="https://www.linkedin.com/in/youness-lagnaoui-98a6b9231/"
+            class="footer-link footer-float link-underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-linkedin-in text-[0.8rem]"></i>
+            <span>LinkedIn</span>
+          </a>
+          
+          <a
+            href="https://github.com/youness1301"
+            class="footer-link footer-float link-underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-github text-[0.8rem]"></i>
+            <span>GitHub</span>
+          </a>
+          
+          <a
+            href="https://tryhackme.com/p/StarkJr01"
+            class="footer-link footer-float link-underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class=" text-[0.8rem]"></i>
+            <span>TryHackMe</span>
+          </a>
+          
+          <a
+            href="https://app.hackthebox.com/users/1019787"
+            class="footer-link footer-float link-underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class=" text-[0.8rem]"></i>
+            <span>Hack The Box</span>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <div class="search-overlay" data-search-overlay>
+  <div class="search-overlay-backdrop" data-search-close></div>
+
+  <div class="search-panel">
+    <div class="search-panel-header">
+      <div class="search-input-wrap">
+        <i class="fa-solid fa-magnifying-glass text-[0.8rem] text-muted"></i>
+        <input
+          type="search"
+          class="search-input"
+          placeholder="Search posts..."
+          autocomplete="off"
+          data-search-input
+        />
+      </div>
+      <button
+        type="button"
+        class="search-close"
+        data-search-close
+        aria-label="Close search"
+      >
+        <i class="fa-solid fa-xmark text-[0.8rem]"></i>
+      </button>
+    </div>
+
+    <div class="search-panel-body">
+      <div class="search-results" data-search-results>
+        <div class="search-empty-state">
+          <div class="search-empty-icon">
+            <i class="fa-solid fa-magnifying-glass text-[1rem]"></i>
+          </div>
+          <p class="search-empty-title">Start searching</p>
+          <p class="search-empty-subtitle">
+            Enter keywords to search articles.
+          </p>
+        </div>
+      </div>
+
+      <div class="search-footer-hints">
+        <div class="search-hint-key">
+          <span>↑↓</span>
+          <span>Navigate</span>
+        </div>
+        <div class="search-hint-key">
+          <span>↵</span>
+          <span>Select</span>
+        </div>
+        <div class="search-hint-key">
+          <span>ESC</span>
+          <span>Close</span>
+        </div>
+        <div class="search-hint-key search-hint-right">
+          <span>Ctrl</span><span>K</span>
+          <span>Shortcut</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="dock" data-dock>
+  <div class="dock-inner">
+    
+    <div class="dock-panel" data-dock-panel>
+      
+      
+      <button
+        type="button"
+        class="dock-action"
+        data-dock-action="back"
+        aria-label="Go back"
+      >
+        <i class="fa-solid fa-arrow-left text-[0.7rem]"></i>
+      </button>
+      <span class="dock-divider" aria-hidden="true"></span>
+      
+
+      
+      <button
+        type="button"
+        class="dock-action"
+        data-dock-action="search"
+        aria-label="Search"
+        onclick="window.MinimalSearch && window.MinimalSearch.open()"
+      >
+        <i class="fa-solid fa-magnifying-glass text-[0.7rem]"></i>
+      </button>
+
+      
+      <span class="dock-divider" aria-hidden="true"></span>
+
+      
+      <button
+        type="button"
+        class="dock-action"
+        data-dock-action="top"
+        aria-label="Back to top"
+      >
+        <i class="fa-solid fa-arrow-up text-[0.7rem]"></i>
+      </button>
+    </div>
+
+    
+    <button
+      type="button"
+      class="dock-toggle"
+      aria-label="Open quick actions"
+      data-dock-toggle
+    >
+      <span class="dock-toggle-dots"></span>
+    </button>
+  </div>
+</div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/search.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justified-gallery@3.8.2/dist/js/justifiedGallery.min.js" defer></script>
+    <script src="/js/lightbox.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+  </body>
+</html>
