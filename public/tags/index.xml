@@ -14,13 +14,6 @@
 		
 			<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>COMCYBER</title>
-				<link>http://localhost:1313/tags/comcyber/</link>
-				<pubDate>Sun, 09 Aug 2026 12:34:36 -0400</pubDate>
-				<guid>http://localhost:1313/tags/comcyber/</guid>
-				<description></description>
-			</item>
-			<item>
 				<title>CTF</title>
 				<link>http://localhost:1313/tags/ctf/</link>
 				<pubDate>Sun, 09 Aug 2026 12:34:36 -0400</pubDate>
@@ -32,13 +25,6 @@
 				<link>http://localhost:1313/tags/mavlink-protocole/</link>
 				<pubDate>Sun, 09 Aug 2026 12:34:36 -0400</pubDate>
 				<guid>http://localhost:1313/tags/mavlink-protocole/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>OP SEC</title>
-				<link>http://localhost:1313/tags/op-sec/</link>
-				<pubDate>Sun, 09 Aug 2026 12:34:36 -0400</pubDate>
-				<guid>http://localhost:1313/tags/op-sec/</guid>
 				<description></description>
 			</item>
 			<item>
