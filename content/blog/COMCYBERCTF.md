@@ -1,6 +1,6 @@
 +++
 title = 'COMCYBER CTF'
-date = 2026-08-09T12:34:36-04:00
+date = 2026-10-12T12:34:36-04:00
 description = "Cet article se base sur la résolution d'un challenge de cyber sécurité développé par le Commandement de la Cyber Défense (COMCYBER)"
 tags = ["CTF", "COMCYBER", "OPSEC"]
 categories = ["CTF Writeup"]
