@@ -4,6 +4,10 @@ date = 2025-04-13T19:25:55+02:00
 draft = false
 +++
 
+
+![Resize](/images/cybersec_linkedin_vf.jpg?width=200px)
+
+
 👋 Bonjour et bienvenue,
 
 Je m'appelle Youness LAGNAOUI, également connu sous le pseudonyme starkjr01. Ingénieur diplômé de l’ECE Paris, je suis aujourd’hui Inspecteur IT au sein de l'Inspection Générale du Groupe BPCE, où je m’attaque quotidiennement à des problématiques de sécurité complexes.
