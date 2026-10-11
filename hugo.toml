@@ -9,13 +9,13 @@ theme = "minimal-black"
 [params]
   user = "starkjr01"
   math = true
-  favicon = "images/blog_pp.png"
-  appleTouchIcon = "images/blog_pp.png"
+  favicon = "images/blog_ppvf2.png"
+  appleTouchIcon = "images/blog_ppvf2.png"
   [params.theme]
     defaultTheme = "dark" 
   [params.author]
     name = "Cybersec Articles"
-    avatar = "/images/blog_pp.png"
+    avatar = "/images/blog_ppvf2.png"
     
     # Hero Section
     [params.hero]

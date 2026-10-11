@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Sun, 09 Aug 2026 12:34:36 -0400</lastBuildDate>
+			<lastBuildDate>Sun, 11 Oct 2026 12:34:36 -0400</lastBuildDate>
 		
 			<atom:link href="http://localhost:1313/categories/ctf-writeup/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>COMCYBER CTF</title>
+				<link>http://localhost:1313/blog/comcyberctf/</link>
+				<pubDate>Sun, 11 Oct 2026 12:34:36 -0400</pubDate>
+				<guid>http://localhost:1313/blog/comcyberctf/</guid>
+				<description>&lt;p&gt;WriteUp : By Youness LAGNAOUI&lt;/p&gt;&#xA;&lt;p&gt;Cet article se base sur la résolution du challenge développé par le Commandement de la Cyber Defense (COMCYBER) dans le cadre des campagnes de recrutement. Le challenge est accessible via Root Me à l&amp;rsquo;adresse : &lt;a&#xA;  href=&#34;https://www.root-me.org/fr/Challenges/Realiste/ComCyber-Challenge&#34;&#xA;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;  class=&#34;md-link&#34;&#xA;&gt;&#xA;  https://www.root-me.org/fr/Challenges/Realiste/ComCyber-Challenge&#xA;&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&lt;figure class=&#34;md-image&#34;&gt;&#xA;  &lt;a href=&#34;http://localhost:1313/images/comcyber/0.png?width=200px&#34; class=&#34;glightbox&#34;&gt;&#xA;    &lt;img&#xA;      src=&#34;http://localhost:1313/images/comcyber/0.png?width=200px&#34;&#xA;      alt=&#34;Resize&#34;&#xA;      loading=&#34;lazy&#34;&#xA;    /&gt;&#xA;  &lt;/a&gt;&#xA;  &#xA;&lt;/figure&gt;&#xA;&lt;/p&gt;&#xA;&lt;h2 id=&#34;mission-1--post-mortem-communication-véhicule&#34;&gt;&#xA;  &lt;a href=&#34;#mission-1--post-mortem-communication-v%c3%a9hicule&#34; class=&#34;md-heading-anchor&#34;&gt;&#xA;    Mission 1 : Post-mortem communication véhicule&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;&lt;figure class=&#34;md-image&#34;&gt;&#xA;  &lt;a href=&#34;http://localhost:1313/images/comcyber/1.png?width=200px&#34; class=&#34;glightbox&#34;&gt;&#xA;    &lt;img&#xA;      src=&#34;http://localhost:1313/images/comcyber/1.png?width=200px&#34;&#xA;      alt=&#34;Resize&#34;&#xA;      loading=&#34;lazy&#34;&#xA;    /&gt;&#xA;  &lt;/a&gt;&#xA;  &#xA;&lt;/figure&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&lt;figure class=&#34;md-image&#34;&gt;&#xA;  &lt;a href=&#34;http://localhost:1313/images/comcyber/2.png?width=200px&#34; class=&#34;glightbox&#34;&gt;&#xA;    &lt;img&#xA;      src=&#34;http://localhost:1313/images/comcyber/2.png?width=200px&#34;&#xA;      alt=&#34;Resize&#34;&#xA;      loading=&#34;lazy&#34;&#xA;    /&gt;&#xA;  &lt;/a&gt;&#xA;  &#xA;&lt;/figure&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&lt;figure class=&#34;md-image&#34;&gt;&#xA;  &lt;a href=&#34;http://localhost:1313/images/comcyber/3.png?width=200px&#34; class=&#34;glightbox&#34;&gt;&#xA;    &lt;img&#xA;      src=&#34;http://localhost:1313/images/comcyber/3.png?width=200px&#34;&#xA;      alt=&#34;Resize&#34;&#xA;      loading=&#34;lazy&#34;&#xA;    /&gt;&#xA;  &lt;/a&gt;&#xA;  &#xA;&lt;/figure&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;Nous avons à notre disposition une capture réseau correspondant à une communication via protocole TELNET avec le véhicule.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>Drone Hacking</title>
 				<link>http://localhost:1313/blog/drone-hacking/</link>
